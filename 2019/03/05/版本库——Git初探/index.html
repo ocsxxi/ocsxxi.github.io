@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>版本库——Git初探 | Ocsxxi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="GitGit Bash版本控制" />
+  
+  
+  
+  
+  <meta name="description" content="Git是一个简便的版本控制工具，初期使用一般是通过Git Bash来进行使用，以便于记住Git命令，后期一般通过Git GUI来进行使用，可以更加方便快捷地管理版本库。（ 版本库(repository)，也称仓库，是用于存储不同版本信息、以及文件的仓库） Git环境需要进行本地安装，官网https:&#x2F;&#x2F;git-scm.com&#x2F;，通过自己的操作系统来选择合适的安装包进行下载安装并进行初始配置。 如在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="版本库——Git初探">
+<meta property="og:url" content="https://ocsxxi.github.io/2019/03/05/%E7%89%88%E6%9C%AC%E5%BA%93%E2%80%94%E2%80%94Git%E5%88%9D%E6%8E%A2/index.html">
+<meta property="og:site_name" content="Ocsxxi">
+<meta property="og:description" content="Git是一个简便的版本控制工具，初期使用一般是通过Git Bash来进行使用，以便于记住Git命令，后期一般通过Git GUI来进行使用，可以更加方便快捷地管理版本库。（ 版本库(repository)，也称仓库，是用于存储不同版本信息、以及文件的仓库） Git环境需要进行本地安装，官网https:&#x2F;&#x2F;git-scm.com&#x2F;，通过自己的操作系统来选择合适的安装包进行下载安装并进行初始配置。 如在">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190305211934575.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190305212741806.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190305213045945.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190305213313956.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190305213446482.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190305213653180.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190305213818773.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019030521415072.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019030521430683.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190305214348780.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190305214802549.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190305215137960.png">
+<meta property="article:published_time" content="2019-03-05T13:55:49.000Z">
+<meta property="article:modified_time" content="2020-10-31T09:52:13.920Z">
+<meta property="article:author" content="Zhiyuan Alex Liu">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="Git Bash">
+<meta property="article:tag" content="版本控制">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190305211934575.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Ocsxxi" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/fashion.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Ocsxxi" rel="home"> Ocsxxi </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">分类</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">标签</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-版本库——Git初探" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      版本库——Git初探
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/03/05/%E7%89%88%E6%9C%AC%E5%BA%93%E2%80%94%E2%80%94Git%E5%88%9D%E6%8E%A2/" class="article-date">
+	  <time datetime="2019-03-05T13:55:49.000Z" itemprop="datePublished">三月 5, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Git/">Git</a>
+ 
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Git是一个简便的版本控制工具，初期使用一般是通过Git Bash来进行使用，以便于记住Git命令，后期一般通过Git GUI来进行使用，可以更加方便快捷地管理版本库。（ 版本库(repository)，也称仓库，是用于存储不同版本信息、以及文件的仓库）</p>
+<p>Git环境需要进行本地安装，官网<a target="_blank" rel="noopener" href="https://git-scm.com/">https://git-scm.com/</a>，通过自己的操作系统来选择合适的安装包进行下载安装并进行初始配置。</p>
+<p>如在windows系统下，想将桌面的test文件夹作为某次开发的仓库，可以双击打开test文件夹，在空白处右键选择“git bash here”<br><img src="https://img-blog.csdnimg.cn/20190305211934575.png"><br>即可打开bash命令行，然后直接在bash命令行中键入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<p>如果反馈信息如下，并在下一行等待输入，即创建版本库成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Initialized empty Git repository <span class="keyword">in</span> C:/Users/Admin/Desktop/<span class="built_in">test</span>/.git/</span><br></pre></td></tr></table></figure>
+
+
+<p>在test目录内创建rd.txt文本文件，并在其中写入”hello world”<br><img src="https://img-blog.csdnimg.cn/20190305212741806.png"><br>继续在git bash 命令行中键入命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add rd.txt</span><br></pre></td></tr></table></figure>
+<p>这行命令的作用是将rd.txt作为预备提交文件进行添加<br>如果如下显示，则添加成功<br><img src="https://img-blog.csdnimg.cn/20190305213045945.png"></p>
+<p>接下来进行第一次提交，使用命令如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;&lt;提交说明&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>&lt;提交说明&gt;可以更改为自己的说明，如果显示如下，则提交成功<br><img src="https://img-blog.csdnimg.cn/20190305213313956.png"></p>
+<p>我们再将rd.txt进行一次修改，再进行第二次提交<br><img src="https://img-blog.csdnimg.cn/20190305213446482.png"><br><img src="https://img-blog.csdnimg.cn/20190305213653180.png"><br>然后我们现在可以键入以下命令，来查看当前仓库的日志</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+<p>如下所示<br><img src="https://img-blog.csdnimg.cn/20190305213818773.png"><br>在黄色的commit后面长长的一串码是对应版本的版本号</p>
+<p>我们现在假设产品经理告诉我们，第二次的修改是没有用的，那么我们就需要将版本回滚到第一版，也就是”my first commit”那一版，我们可以键入下面的命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^</span><br></pre></td></tr></table></figure>
+<p>可以看到反馈了如下信息<br><img src="https://img-blog.csdnimg.cn/2019030521415072.png"><br>并且rd.txt和git log命令中，均只剩下第一次提交的内容，如下所示<br><img src="https://img-blog.csdnimg.cn/2019030521430683.png"><br><img src="https://img-blog.csdnimg.cn/20190305214348780.png"><br>这样就说明了我们回滚操作成功了</p>
+<p>现在再假设产品经理告诉我们，他看错了，第二次修改的内容是需要的，那么这样我们就要退回回滚操作之前，只要当前bash命令行没有关闭，并且我们还能查到第二次的版本id，那么我们就能退回回滚操作之前，命令如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard &lt;版本号&gt;</span><br></pre></td></tr></table></figure>
+<p>&lt;版本号&gt;应该填写自己命令行中的第二次提交的版本id，如下<br><img src="https://img-blog.csdnimg.cn/20190305214802549.png"><br>看到这里，有很多小伙伴就会迷茫了，会问：刚才显示的第二次的版本id不是116b28f9460a5a0222ef0328c0c76e3c3fc95121吗？为什么我只写了一个116b2？</p>
+<p>这是因为git的控制机制来说，我们只要能够给bash一个可以辨识到独一无二的版本号的序列，那么它就可以自动为我们匹配到我们想要去使用的版本号。</p>
+<p>使用退回命令后，rd.txt内容显示如下，即表明我们的退回回滚操作之前的操作成功。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190305215137960.png"></p>
+<p>感谢您的阅读</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Git/">Git</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git-Bash/" rel="tag">Git Bash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" rel="tag">版本控制</a></li></ul>
+
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC81MTg0OS8yODMzMA==">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/04/05/Ubuntu%20Server%E5%AE%89%E8%A3%85%E5%90%8E%E6%97%A0%E6%B3%95%E8%BF%9B%E5%85%A5root%E8%B6%85%E7%BA%A7%E7%94%A8%E6%88%B7%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Ubuntu Server安装后无法进入root超级用户解决办法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/12/20/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84GROUP%20BY%E4%B8%8EORDER%20BY%E3%80%81WHERE%E4%B8%8EHAVING/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">数据库中的GROUP BY与ORDER BY、WHERE与HAVING</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav">无</ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2020 Ocsxxi All Rights Reserved.
+        
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<!--<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>-->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/bootstrap.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1279387796&web_id=1279387796" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

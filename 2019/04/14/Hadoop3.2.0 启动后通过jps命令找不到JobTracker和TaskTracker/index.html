@@ -3,23 +3,31 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | Ocsxxi</title>
+  <title>Hadoop3.2.0 启动后通过jps命令找不到JobTracker和TaskTracker | Ocsxxi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  <meta name="keywords" content="大数据HadoopJobTrackerTaskTracker" />
   
   
   
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  
+  <meta name="description" content="原因是Hadoop2.0以后的版本采用的是 YARN 作为资源管理器，包含了1.x版本的JobTracker和TaskTracker功能， 即 YARN 替代了单独存在的 JobTracker 与 TaskTracker。 2.0之后的版本，安装配置成功后启动Hadoop后，通过jps命令将如图只显示以下几个进程  参考：https:&#x2F;&#x2F;blog.csdn.net&#x2F;ASN_forever&#x2F;arti">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://ocsxxi.github.io/2020/10/28/hello-world/index.html">
+<meta property="og:title" content="Hadoop3.2.0 启动后通过jps命令找不到JobTracker和TaskTracker">
+<meta property="og:url" content="https://ocsxxi.github.io/2019/04/14/Hadoop3.2.0%20%E5%90%AF%E5%8A%A8%E5%90%8E%E9%80%9A%E8%BF%87jps%E5%91%BD%E4%BB%A4%E6%89%BE%E4%B8%8D%E5%88%B0JobTracker%E5%92%8CTaskTracker/index.html">
 <meta property="og:site_name" content="Ocsxxi">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="原因是Hadoop2.0以后的版本采用的是 YARN 作为资源管理器，包含了1.x版本的JobTracker和TaskTracker功能， 即 YARN 替代了单独存在的 JobTracker 与 TaskTracker。 2.0之后的版本，安装配置成功后启动Hadoop后，通过jps命令将如图只显示以下几个进程  参考：https:&#x2F;&#x2F;blog.csdn.net&#x2F;ASN_forever&#x2F;arti">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-10-28T07:27:14.774Z">
-<meta property="article:modified_time" content="2020-10-28T07:27:14.774Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190414150535881.PNG">
+<meta property="article:published_time" content="2019-04-14T07:12:30.000Z">
+<meta property="article:modified_time" content="2020-10-31T10:01:01.259Z">
 <meta property="article:author" content="Zhiyuan Alex Liu">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="Hadoop">
+<meta property="article:tag" content="JobTracker">
+<meta property="article:tag" content="TaskTracker">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190414150535881.PNG">
   
     <link rel="alternate" href="/atom.xml" title="Ocsxxi" type="application/atom+xml">
   
@@ -106,7 +114,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-hello-world" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-Hadoop3.2.0 启动后通过jps命令找不到JobTracker和TaskTracker" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -114,7 +122,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      Hello World
+      Hadoop3.2.0 启动后通过jps命令找不到JobTracker和TaskTracker
     </h1>
   
 
@@ -122,11 +130,14 @@
     
     <div class="article-meta">
       
-	<a href="/2020/10/28/hello-world/" class="article-date">
-	  <time datetime="2020-10-28T07:27:14.774Z" itemprop="datePublished">十月 28, 2020</time>
+	<a href="/2019/04/14/Hadoop3.2.0%20%E5%90%AF%E5%8A%A8%E5%90%8E%E9%80%9A%E8%BF%87jps%E5%91%BD%E4%BB%A4%E6%89%BE%E4%B8%8D%E5%88%B0JobTracker%E5%92%8CTaskTracker/" class="article-date">
+	  <time datetime="2019-04-14T07:12:30.000Z" itemprop="datePublished">四月 14, 2019</time>
 	</a>
 
-       
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE-%E4%BA%91%E8%AE%A1%E7%AE%97/">大数据/云计算</a>
+ 
       
 	<span id="busuanzi_container_page_pv">
 	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
@@ -135,25 +146,22 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <p>原因是Hadoop2.0以后的版本采用的是 YARN 作为资源管理器，包含了1.x版本的JobTracker和TaskTracker功能，</p>
+<p>即 <strong>YARN 替代了单独存在的 JobTracker 与 TaskTracker</strong>。</p>
+<p>2.0之后的版本，安装配置成功后启动Hadoop后，通过jps命令将如图只显示以下几个进程<br><img src="https://img-blog.csdnimg.cn/20190414150535881.PNG"> </p>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/ASN_forever/article/details/81062238">https://blog.csdn.net/ASN_forever/article/details/81062238</a></p>
 
       
     </div>
     <footer class="entry-meta entry-footer">
       
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE-%E4%BA%91%E8%AE%A1%E7%AE%97/">大数据/云计算</a>
+
       
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JobTracker/" rel="tag">JobTracker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TaskTracker/" rel="tag">TaskTracker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li></ul>
+
       
         
 	<div id="comment">
@@ -187,15 +195,20 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/10/30/%E6%80%BB%E7%BB%93-%E9%9A%8F%E6%9C%BA%E4%BA%8B%E4%BB%B6%E4%B8%8E%E6%A6%82%E7%8E%87/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/04/14/Python%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0takes%20no%20arguments/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          总结-随机事件与概率
+          Hadoop3.2.0 启动后通过jps命令找不到JobTracker和TaskTracker
         
       </div>
     </a>
   
+  
+    <a href="/2019/04/05/Ubuntu%20Server%E5%AE%89%E8%A3%85%E5%90%8E%E6%97%A0%E6%B3%95%E8%BF%9B%E5%85%A5root%E8%B6%85%E7%BA%A7%E7%94%A8%E6%88%B7%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Ubuntu Server安装后无法进入root超级用户解决办法</div>
+    </a>
   
 </nav>
 
@@ -208,7 +221,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol>
+      <ol class="nav">无</ol>
     
     </div>
   </aside>

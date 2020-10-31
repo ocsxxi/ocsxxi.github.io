@@ -417,7 +417,7 @@ tr td:first-child {font-weight:bold;}
 <!-- Table of Contents -->
 
   
-    <article id="post-hello-world"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-JMeter断言不提示错误信息"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -425,7 +425,7 @@ tr td:first-child {font-weight:bold;}
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2020/10/28/hello-world/">Hello World</a>
+      <a class="article-title" href="/2019/07/31/JMeter%E6%96%AD%E8%A8%80%E4%B8%8D%E6%8F%90%E7%A4%BA%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF/">JMeter断言不提示错误信息</a>
     </h1>
   
 
@@ -433,34 +433,483 @@ tr td:first-child {font-weight:bold;}
     
     <div class="article-meta">
       
-	<a href="/2020/10/28/hello-world/" class="article-date">
-	  <time datetime="2020-10-28T07:27:14.774Z" itemprop="datePublished">十月 28, 2020</time>
+	<a href="/2019/07/31/JMeter%E6%96%AD%E8%A8%80%E4%B8%8D%E6%8F%90%E7%A4%BA%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF/" class="article-date">
+	  <time datetime="2019-07-31T07:56:49.000Z" itemprop="datePublished">七月 31, 2019</time>
 	</a>
 
-       
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a>
+ 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <p>因为工作需要，所以自己参考了 <a target="_blank" rel="noopener" href="https://blog.csdn.net/u012111923/article/details/80705141#comments">https://blog.csdn.net/u012111923/article/details/80705141#comments</a> 大佬的教程，根据教程进行了一次测试。</p>
+<p>在其中，我发现断言无论如何都不会显示，如下图<br><img src="https://img-blog.csdnimg.cn/20190731154715381.PNG"><br>即使是在View Results Tree里全部通过如下图，断言也均不显示<br><img src="https://img-blog.csdnimg.cn/2019073115485956.PNG"></p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p><strong>是因为JMeter的机制，在断言成功的状态下并不会显示断言是否成功，仅会在断言失败的情况下才会显示错误信息。</strong><br>接下来，在Response Assertions的界面上，随便打一段匹配文本上去，让它进行匹配，如下图所示<br><img src="https://img-blog.csdnimg.cn/20190731155236172.PNG"><br>现在点击运行，我们再来看看断言结果<br><img src="https://img-blog.csdnimg.cn/2019073115550613.PNG"><br>这不就是我们期待已久的断言结果吗，哈哈</p>
 
       
     </div>
     <footer class="entry-meta entry-footer">
       
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a>
+
       
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JMeter/" rel="tag">JMeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" rel="tag">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%AD%E8%A8%80/" rel="tag">断言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" rel="tag">测试工具</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" rel="tag">软件测试</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-React Native 500报错指向 `&lt;`"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/04/24/React%20Native%20500%E6%8A%A5%E9%94%99%E6%8C%87%E5%90%91%20%60%3C%60/">React Native 500报错指向 &#39;&lt;&#39;</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/04/24/React%20Native%20500%E6%8A%A5%E9%94%99%E6%8C%87%E5%90%91%20%60%3C%60/" class="article-date">
+	  <time datetime="2019-04-24T14:35:13.000Z" itemprop="datePublished">四月 24, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-Native/">React Native</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>前提</strong>：</p>
+<p>配置好了React Native并且按照官网的教程，生成了我的AwesomeProject，并且成功运行。</p>
+<p>接下来按照官网教程生成 Hello World程序，代码如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Text, View &#125; <span class="keyword">from</span> <span class="string">&#x27;react-native&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldApp</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;View style=&#123;&#123; <span class="attr">flex</span>: <span class="number">1</span>, <span class="attr">justifyContent</span>: <span class="string">&quot;center&quot;</span>, <span class="attr">alignItems</span>: <span class="string">&quot;center&quot;</span> &#125;&#125;&gt;</span><br><span class="line">          &lt;Text&gt;Hello, world!&lt;/Text&gt;</span><br><span class="line">        &lt;/View&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将上面的代码覆盖App.js后，在命令行中输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native run-android</span><br></pre></td></tr></table></figure>
+<p>虚拟机反馈报错500，并在cmd中用红色的^指向return中第一个View的开始符号“&lt;”</p>
+<p><strong>解决办法</strong>：</p>
+<p>关闭含有server的窗口，重新输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native start</span><br></pre></td></tr></table></figure>
+<p>然后将应用部署至虚拟机，输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native run-android</span><br></pre></td></tr></table></figure>
+<p>虚拟机在屏幕中央显示了Hello World，成功运行，问题解决。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/React-Native/">React Native</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/" rel="tag">React Native</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-Android splash界面 —— 加载界面"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/04/24/Android%20splash%E7%95%8C%E9%9D%A2%20%E2%80%94%E2%80%94%20%E5%8A%A0%E8%BD%BD%E7%95%8C%E9%9D%A2/">Android splash界面 —— 加载界面</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/04/24/Android%20splash%E7%95%8C%E9%9D%A2%20%E2%80%94%E2%80%94%20%E5%8A%A0%E8%BD%BD%E7%95%8C%E9%9D%A2/" class="article-date">
+	  <time datetime="2019-04-24T07:09:35.000Z" itemprop="datePublished">四月 24, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>经过了两个小时的努力，终于把这个问题解决了，关于这个加载界面，真的是一把鼻涕一把泪，话不多说上代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.app.Activity;</span><br><span class="line"><span class="keyword">import</span> android.content.Intent;</span><br><span class="line"><span class="keyword">import</span> android.os.Handler;</span><br><span class="line"><span class="keyword">import</span> android.os.Message;</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.view.Window;</span><br><span class="line"><span class="keyword">import</span> android.view.WindowManager;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SplashActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> Handler handler= <span class="keyword">new</span> Handler() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">            jumpToMainPage();</span><br><span class="line">            <span class="keyword">super</span>.handleMessage(msg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);        </span><br><span class="line">        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,</span><br><span class="line">                                    WindowManager.LayoutParams.FLAG_FULLSCREEN);</span><br><span class="line">        requestWindowFeature(Window.FEATURE_NO_TITLE);</span><br><span class="line">        setContentView(R.layout.activity_splash);</span><br><span class="line">        handler.sendEmptyMessageDelayed(<span class="number">0</span>,<span class="number">4000</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">jumpToMainPage</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent(SplashActivity.<span class="keyword">this</span>, MainActivity.class);</span><br><span class="line">        startActivity(intent);</span><br><span class="line">        finish();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在此我使用了 Handler 来进行页面的延迟自动加载</p>
+<p>需要注意的是 requestWindowFeature() 一定要在 setContentView() 之前被执行</p>
+<p>否则在虚拟机上运行会崩溃，emmmm至少我的是崩溃了</p>
+<p>从知道上面这条信息还是从logcat获取的，在这之前我并不重视 logcat，所以调试的时候一定要注意logcat上的出错信息，对于程序开发会有很大的帮助</p>
+<p>还有一点要说的就是，我的 splash界面 是由原来的 main界面 改过来的，所以一定要记得在 splash界面 中的顶层容器的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tools:context&#x3D;&quot;&quot;</span><br></pre></td></tr></table></figure>
+<p>属性中填写实际的类名以及类存在的路径，否则无法启动</p>
+<p>感谢您的阅读</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A0%E8%BD%BD%E7%95%8C%E9%9D%A2/" rel="tag">加载界面</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-Python构造函数takes no arguments"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/04/14/Python%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0takes%20no%20arguments/">Hadoop3.2.0 启动后通过jps命令找不到JobTracker和TaskTracker</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/04/14/Python%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0takes%20no%20arguments/" class="article-date">
+	  <time datetime="2019-04-14T07:43:18.000Z" itemprop="datePublished">四月 14, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如图建立People类，并实例化一个对象p1, 报错如图<br><img src="https://img-blog.csdnimg.cn/20190414153255727.PNG"></p>
+<p>我们来详细看一下如图报错：编译器告诉我们说 People类的构造函数不能接收参数<br><img src="https://img-blog.csdnimg.cn/20190414153426827.PNG"></p>
+<p><strong>解决办法</strong>：</p>
+<p><strong>使用def <strong>init</strong>(self, …)</strong>     ——&gt;注意这里的下划线是两个下划线__，而不是单个下划线_<br><strong>而非def <em>init</em>(self, …)</strong></p>
+<p>如图删除原来的People类<br><img src="https://img-blog.csdnimg.cn/20190414153834932.PNG"></p>
+<p>如图重新构建People类，并实例化People类对象p1<br><img src="https://img-blog.csdnimg.cn/20190414153915825.PNG"><br>通过sayHello()函数来测试是否成功实例化对象, 输出了信息</p>
+<p>即构造类成功</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" rel="tag">程序设计</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">面向对象</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-Hadoop3.2.0 启动后通过jps命令找不到JobTracker和TaskTracker"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/04/14/Hadoop3.2.0%20%E5%90%AF%E5%8A%A8%E5%90%8E%E9%80%9A%E8%BF%87jps%E5%91%BD%E4%BB%A4%E6%89%BE%E4%B8%8D%E5%88%B0JobTracker%E5%92%8CTaskTracker/">Hadoop3.2.0 启动后通过jps命令找不到JobTracker和TaskTracker</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/04/14/Hadoop3.2.0%20%E5%90%AF%E5%8A%A8%E5%90%8E%E9%80%9A%E8%BF%87jps%E5%91%BD%E4%BB%A4%E6%89%BE%E4%B8%8D%E5%88%B0JobTracker%E5%92%8CTaskTracker/" class="article-date">
+	  <time datetime="2019-04-14T07:12:30.000Z" itemprop="datePublished">四月 14, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE-%E4%BA%91%E8%AE%A1%E7%AE%97/">大数据/云计算</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原因是Hadoop2.0以后的版本采用的是 YARN 作为资源管理器，包含了1.x版本的JobTracker和TaskTracker功能，</p>
+<p>即 <strong>YARN 替代了单独存在的 JobTracker 与 TaskTracker</strong>。</p>
+<p>2.0之后的版本，安装配置成功后启动Hadoop后，通过jps命令将如图只显示以下几个进程<br><img src="https://img-blog.csdnimg.cn/20190414150535881.PNG"> </p>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/ASN_forever/article/details/81062238">https://blog.csdn.net/ASN_forever/article/details/81062238</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE-%E4%BA%91%E8%AE%A1%E7%AE%97/">大数据/云计算</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JobTracker/" rel="tag">JobTracker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TaskTracker/" rel="tag">TaskTracker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-Ubuntu Server安装后无法进入root超级用户解决办法"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/04/05/Ubuntu%20Server%E5%AE%89%E8%A3%85%E5%90%8E%E6%97%A0%E6%B3%95%E8%BF%9B%E5%85%A5root%E8%B6%85%E7%BA%A7%E7%94%A8%E6%88%B7%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">Ubuntu Server安装后无法进入root超级用户解决办法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/04/05/Ubuntu%20Server%E5%AE%89%E8%A3%85%E5%90%8E%E6%97%A0%E6%B3%95%E8%BF%9B%E5%85%A5root%E8%B6%85%E7%BA%A7%E7%94%A8%E6%88%B7%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="article-date">
+	  <time datetime="2019-04-05T09:44:39.000Z" itemprop="datePublished">四月 5, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Ubuntu/">Ubuntu</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>因为要学习Hadoop的缘故，用VMware给自己装了个Ubuntu Server，版本是18.04.2-amd64</p>
+<p>因为之前使用的Ubuntu Desktop版本都是安装时候设置用户的时候，用户和超级用户是同一个密码，因为是学习用，也没有太在意这些，但是这次安装成功以后居然不能用用户的密码登录超级用户，也搜了一小段时间的解决办法。</p>
+<p>最终，给出如下解决方案：</p>
+<ol>
+<li><strong>先使用安装时创建的用户登录进系统</strong></li>
+<li><strong>在控制台输入”sudo passwd”</strong></li>
+<li><strong>提示输入用户密码</strong></li>
+<li><strong>为root输入密码与确认密码</strong></li>
+<li><strong>成功后shell会提示”passwd: password updated successfully”，就可以使用密码登录超级用户了</strong></li>
+</ol>
+<p>附上我自己成功为root用户添加密码的图片</p>
+<p><img src="https://img-blog.csdnimg.cn/20190405173950159.PNG"></p>
+<p>参考: <a target="_blank" rel="noopener" href="https://www.cnblogs.com/yuejin/p/3645294.html">https://www.cnblogs.com/yuejin/p/3645294.html</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Ubuntu/">Ubuntu</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu-Server/" rel="tag">Ubuntu Server</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-版本库——Git初探"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/03/05/%E7%89%88%E6%9C%AC%E5%BA%93%E2%80%94%E2%80%94Git%E5%88%9D%E6%8E%A2/">版本库——Git初探</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/03/05/%E7%89%88%E6%9C%AC%E5%BA%93%E2%80%94%E2%80%94Git%E5%88%9D%E6%8E%A2/" class="article-date">
+	  <time datetime="2019-03-05T13:55:49.000Z" itemprop="datePublished">三月 5, 2019</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Git/">Git</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Git是一个简便的版本控制工具，初期使用一般是通过Git Bash来进行使用，以便于记住Git命令，后期一般通过Git GUI来进行使用，可以更加方便快捷地管理版本库。（ 版本库(repository)，也称仓库，是用于存储不同版本信息、以及文件的仓库）</p>
+<p>Git环境需要进行本地安装，官网<a target="_blank" rel="noopener" href="https://git-scm.com/">https://git-scm.com/</a>，通过自己的操作系统来选择合适的安装包进行下载安装并进行初始配置。</p>
+<p>如在windows系统下，想将桌面的test文件夹作为某次开发的仓库，可以双击打开test文件夹，在空白处右键选择“git bash here”<br><img src="https://img-blog.csdnimg.cn/20190305211934575.png"><br>即可打开bash命令行，然后直接在bash命令行中键入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<p>如果反馈信息如下，并在下一行等待输入，即创建版本库成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Initialized empty Git repository <span class="keyword">in</span> C:/Users/Admin/Desktop/<span class="built_in">test</span>/.git/</span><br></pre></td></tr></table></figure>
+
+
+<p>在test目录内创建rd.txt文本文件，并在其中写入”hello world”<br><img src="https://img-blog.csdnimg.cn/20190305212741806.png"><br>继续在git bash 命令行中键入命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add rd.txt</span><br></pre></td></tr></table></figure>
+<p>这行命令的作用是将rd.txt作为预备提交文件进行添加<br>如果如下显示，则添加成功<br><img src="https://img-blog.csdnimg.cn/20190305213045945.png"></p>
+<p>接下来进行第一次提交，使用命令如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;&lt;提交说明&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>&lt;提交说明&gt;可以更改为自己的说明，如果显示如下，则提交成功<br><img src="https://img-blog.csdnimg.cn/20190305213313956.png"></p>
+<p>我们再将rd.txt进行一次修改，再进行第二次提交<br><img src="https://img-blog.csdnimg.cn/20190305213446482.png"><br><img src="https://img-blog.csdnimg.cn/20190305213653180.png"><br>然后我们现在可以键入以下命令，来查看当前仓库的日志</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+<p>如下所示<br><img src="https://img-blog.csdnimg.cn/20190305213818773.png"><br>在黄色的commit后面长长的一串码是对应版本的版本号</p>
+<p>我们现在假设产品经理告诉我们，第二次的修改是没有用的，那么我们就需要将版本回滚到第一版，也就是”my first commit”那一版，我们可以键入下面的命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^</span><br></pre></td></tr></table></figure>
+<p>可以看到反馈了如下信息<br><img src="https://img-blog.csdnimg.cn/2019030521415072.png"><br>并且rd.txt和git log命令中，均只剩下第一次提交的内容，如下所示<br><img src="https://img-blog.csdnimg.cn/2019030521430683.png"><br><img src="https://img-blog.csdnimg.cn/20190305214348780.png"><br>这样就说明了我们回滚操作成功了</p>
+<p>现在再假设产品经理告诉我们，他看错了，第二次修改的内容是需要的，那么这样我们就要退回回滚操作之前，只要当前bash命令行没有关闭，并且我们还能查到第二次的版本id，那么我们就能退回回滚操作之前，命令如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard &lt;版本号&gt;</span><br></pre></td></tr></table></figure>
+<p>&lt;版本号&gt;应该填写自己命令行中的第二次提交的版本id，如下<br><img src="https://img-blog.csdnimg.cn/20190305214802549.png"><br>看到这里，有很多小伙伴就会迷茫了，会问：刚才显示的第二次的版本id不是116b28f9460a5a0222ef0328c0c76e3c3fc95121吗？为什么我只写了一个116b2？</p>
+<p>这是因为git的控制机制来说，我们只要能够给bash一个可以辨识到独一无二的版本号的序列，那么它就可以自动为我们匹配到我们想要去使用的版本号。</p>
+<p>使用退回命令后，rd.txt内容显示如下，即表明我们的退回回滚操作之前的操作成功。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190305215137960.png"></p>
+<p>感谢您的阅读</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Git/">Git</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git-Bash/" rel="tag">Git Bash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" rel="tag">版本控制</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-数据库中的GROUP BY与ORDER BY、WHERE与HAVING"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/12/20/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84GROUP%20BY%E4%B8%8EORDER%20BY%E3%80%81WHERE%E4%B8%8EHAVING/">数据库中的GROUP BY与ORDER BY、WHERE与HAVING</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2018/12/20/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84GROUP%20BY%E4%B8%8EORDER%20BY%E3%80%81WHERE%E4%B8%8EHAVING/" class="article-date">
+	  <time datetime="2018-12-20T13:24:20.000Z" itemprop="datePublished">十二月 20, 2018</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在数据库的选择操作SELECT中经常会用到聚合条件，最常见也是最常用的是WHERE语句，故本文不会着重介绍WHERE语句。</p>
+<p>现假设在某数据库中有一个名为PRODUCT的表，表结构及内部数据如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> PRODUCT(</span><br><span class="line">    Pno <span class="built_in">CHAR</span>(<span class="number">20</span>) PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">    Pname <span class="built_in">CHAR</span>(<span class="number">10</span>),</span><br><span class="line">    Pamount <span class="built_in">INT</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+-----+-------+---------+</span><br><span class="line">| Pno | Pname | Pamount |</span><br><span class="line">+-----+-------+---------+</span><br><span class="line">| 001 | a     |       1 |</span><br><span class="line">| 002 | a     |       2 |</span><br><span class="line">| 003 | b     |       1 |</span><br><span class="line">| 004 | b     |       2 |</span><br><span class="line">| 005 | b     |       6 |</span><br><span class="line">+-----+-------+---------+</span><br></pre></td></tr></table></figure>
+
+<h3 id="ORDER-BY"><a href="#ORDER-BY" class="headerlink" title="ORDER BY"></a>ORDER BY</h3><p>这一语句主要是显示排序用，如果选择了多条类似的记录，那么在查询语句中便可用到此语句，使用如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> PRODUCT <span class="keyword">ORDER</span> <span class="keyword">BY</span> Pno <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure>
+<p>上面的语句根据Pno的值来对产品记录进行升序排列(仅当次查询有效)，即根据ORDER BY后跟的列名进行升序排列。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM PRODUCT ORDER BY Pno ASC;</span><br><span class="line">+<span class="comment">-----+-------+---------+</span></span><br><span class="line">| Pno | Pname | Pamount |</span><br><span class="line">+<span class="comment">-----+-------+---------+</span></span><br><span class="line">| 001 | a     |       1 |</span><br><span class="line">| 002 | a     |       2 |</span><br><span class="line">| 003 | b     |       1 |</span><br><span class="line">| 004 | b     |       2 |</span><br><span class="line">| 005 | b     |       6 |</span><br><span class="line">+<span class="comment">-----+-------+---------+</span></span><br><span class="line">5 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<p>如果需要降序排列，只需把最后的ASC更换为DESC即可。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM PRODUCT ORDER BY Pno DESC;</span><br><span class="line">+<span class="comment">-----+-------+---------+</span></span><br><span class="line">| Pno | Pname | Pamount |</span><br><span class="line">+<span class="comment">-----+-------+---------+</span></span><br><span class="line">| 005 | b     |       6 |</span><br><span class="line">| 004 | b     |       2 |</span><br><span class="line">| 003 | b     |       1 |</span><br><span class="line">| 002 | a     |       2 |</span><br><span class="line">| 001 | a     |       1 |</span><br><span class="line">+<span class="comment">-----+-------+---------+</span></span><br><span class="line">5 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<p>§ 当排序列含空值时,排序列为空值的原组最后显示。</p>
+<h3 id="GROUP-BY"><a href="#GROUP-BY" class="headerlink" title="GROUP BY"></a>GROUP BY</h3><p>这一语句主要是作分类汇总，如需要相同名称记录的合计库存量，在查询语句中可用到GROUP BY如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Pname,<span class="keyword">SUM</span>(Pamount) <span class="keyword">FROM</span> PRODUCT <span class="keyword">GROUP</span> <span class="keyword">BY</span> Pname;</span><br></pre></td></tr></table></figure>
+<p>结果如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT Pname,SUM(Pamount) FROM PRODUCT GROUP BY Pname;</span><br><span class="line">+<span class="comment">-------+--------------+</span></span><br><span class="line">| Pname | SUM(Pamount) |</span><br><span class="line">+<span class="comment">-------+--------------+</span></span><br><span class="line">| a     |            3 |</span><br><span class="line">| b     |            9 |</span><br><span class="line">+<span class="comment">-------+--------------+</span></span><br><span class="line">2 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+
+<h3 id="HAVING"><a href="#HAVING" class="headerlink" title="HAVING"></a>HAVING</h3><p>HAVING可以作为WHERE的拓展，因为在WHERE中不可用到聚合函数，而在HAVING中可以使用聚合函数。</p>
+<p>如需了解总量大于5的相同名称记录的合计库存量，则可用到HAVING使用如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Pname,<span class="keyword">SUM</span>(Pamount) <span class="keyword">FROM</span> PRODUCT <span class="keyword">GROUP</span> <span class="keyword">BY</span> Pname <span class="keyword">HAVING</span> <span class="keyword">SUM</span>(Pamount)&gt;<span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+<p>结果如下</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT Pname,SUM(Pamount) FROM PRODUCT GROUP BY Pname HAVING SUM(Pamount)&gt;5;</span><br><span class="line">+<span class="comment">-------+--------------+</span></span><br><span class="line">| Pname | SUM(Pamount) |</span><br><span class="line">+<span class="comment">-------+--------------+</span></span><br><span class="line">| b     |            9 |</span><br><span class="line">+<span class="comment">-------+--------------+</span></span><br><span class="line">1 row in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<p>HAVING与WHERE作用的对象不同。WHERE 子句作用于表和视图，HAVING 子句作用于组。<br>WHERE 在分组和聚合运算之前选取输入行（因此，它控制进入聚合运算的记录）， 而 HAVING 在分组和聚合之后选取分组的行。因此，WHERE 子句不能包含聚合函数；因为试图用聚合函数判断那些行输入做聚合运算是没有意义的。 相反，HAVING 子句总是包含聚合函数。</p>
+<p>以上纯属个人对于选择操作中的ORDER BY、GROUP BY以及HAVING的看法及见解，如有误，感谢各位的指证</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GROUP-BY/" rel="tag">GROUP BY</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HAVING/" rel="tag">HAVING</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ORDER-BY/" rel="tag">ORDER BY</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
       
     </footer>
     <hr class="entry-footer-hr">
@@ -472,6 +921,11 @@ tr td:first-child {font-weight:bold;}
 
   
 
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+  </nav>
 
 </section>
           <aside id="sidebar">
@@ -602,8 +1056,44 @@ tr td:first-child {font-weight:bold;}
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/2020/10/28/hello-world/">Hello World</a></h6>
-              <span>十月 28, 2020</span>
+              <h6 style="margin: 0;"><a href="/2019/07/31/JMeter%E6%96%AD%E8%A8%80%E4%B8%8D%E6%8F%90%E7%A4%BA%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF/">JMeter断言不提示错误信息</a></h6>
+              <span>七月 31, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="/2019/04/24/React%20Native%20500%E6%8A%A5%E9%94%99%E6%8C%87%E5%90%91%20%60%3C%60/">React Native 500报错指向 &#39;&lt;&#39;</a></h6>
+              <span>四月 24, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="/2019/04/24/Android%20splash%E7%95%8C%E9%9D%A2%20%E2%80%94%E2%80%94%20%E5%8A%A0%E8%BD%BD%E7%95%8C%E9%9D%A2/">Android splash界面 —— 加载界面</a></h6>
+              <span>四月 24, 2019</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="/2019/04/14/Python%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0takes%20no%20arguments/">Hadoop3.2.0 启动后通过jps命令找不到JobTracker和TaskTracker</a></h6>
+              <span>四月 14, 2019</span>
             </div>
 
           </li>
@@ -617,7 +1107,7 @@ tr td:first-child {font-weight:bold;}
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native/">React Native</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Ubuntu/">Ubuntu</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE-%E4%BA%91%E8%AE%A1%E7%AE%97/">大数据/云计算</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/">软件测试</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -627,7 +1117,7 @@ tr td:first-child {font-weight:bold;}
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" rel="tag">概率论与数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%80%83%E7%A0%94/" rel="tag">考研</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E4%B8%9A%E7%94%9F%E6%B6%AF/" rel="tag">职业生涯</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GROUP-BY/" rel="tag">GROUP BY</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git-Bash/" rel="tag">Git Bash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HAVING/" rel="tag">HAVING</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMeter/" rel="tag">JMeter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JobTracker/" rel="tag">JobTracker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ORDER-BY/" rel="tag">ORDER BY</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/" rel="tag">React Native</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TaskTracker/" rel="tag">TaskTracker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu-Server/" rel="tag">Ubuntu Server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A0%E8%BD%BD%E7%95%8C%E9%9D%A2/" rel="tag">加载界面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" rel="tag">性能测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%AD%E8%A8%80/" rel="tag">断言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" rel="tag">概率论与数理统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" rel="tag">测试工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" rel="tag">版本控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" rel="tag">程序设计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%80%83%E7%A0%94/" rel="tag">考研</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E4%B8%9A%E7%94%9F%E6%B6%AF/" rel="tag">职业生涯</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" rel="tag">软件测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">面向对象</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -637,7 +1127,7 @@ tr td:first-child {font-weight:bold;}
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 10px;">杂谈</a> <a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 10px;">概率论与数理统计</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 10px;">考研</a> <a href="/tags/%E8%81%8C%E4%B8%9A%E7%94%9F%E6%B6%AF/" style="font-size: 10px;">职业生涯</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/GROUP-BY/" style="font-size: 10px;">GROUP BY</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Git-Bash/" style="font-size: 10px;">Git Bash</a> <a href="/tags/HAVING/" style="font-size: 10px;">HAVING</a> <a href="/tags/Hadoop/" style="font-size: 10px;">Hadoop</a> <a href="/tags/JMeter/" style="font-size: 10px;">JMeter</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/JobTracker/" style="font-size: 10px;">JobTracker</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/ORDER-BY/" style="font-size: 10px;">ORDER BY</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/React-Native/" style="font-size: 10px;">React Native</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/TaskTracker/" style="font-size: 10px;">TaskTracker</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/Ubuntu-Server/" style="font-size: 10px;">Ubuntu Server</a> <a href="/tags/%E5%8A%A0%E8%BD%BD%E7%95%8C%E9%9D%A2/" style="font-size: 10px;">加载界面</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 10px;">大数据</a> <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">性能测试</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E6%96%AD%E8%A8%80/" style="font-size: 10px;">断言</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 10px;">杂谈</a> <a href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" style="font-size: 10px;">概率论与数理统计</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">测试工具</a> <a href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" style="font-size: 10px;">版本控制</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">程序设计</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 10px;">考研</a> <a href="/tags/%E8%81%8C%E4%B8%9A%E7%94%9F%E6%B6%AF/" style="font-size: 10px;">职业生涯</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">软件测试</a> <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" style="font-size: 10px;">面向对象</a>
     </div>
   </div>
 
@@ -647,7 +1137,7 @@ tr td:first-child {font-weight:bold;}
     <h3 class="widget-title">归档</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
