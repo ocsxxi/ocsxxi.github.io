@@ -11,15 +11,15 @@
   
   
   
-  <meta name="description" content="在数据库的选择操作SELECT中经常会用到聚合条件，最常见也是最常用的是WHERE语句，故本文不会着重介绍WHERE语句。 现假设在某数据库中有一个名为PRODUCT的表，表结构及内部数据如下 12345CREATE TABLE PRODUCT(    Pno CHAR(20) PRIMARY KEY,    Pname CHAR(10),    Pamount INT); 123456789+-">
+  <meta name="description" content="在数据库的选择操作SELECT中经常会用到聚合条件，最常见也是最常用的是WHERE语句，故本文不会着重介绍WHERE语句。 现假设在某数据库中有一个名为PRODUCT的表，表结构及内部数据如下 12345CREATE TABLE PRODUCT(    Pno CHAR(20) PRIMARY KEY,    Pname CHAR(10),    Pamount INT);">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库中的GROUP BY与ORDER BY、WHERE与HAVING">
 <meta property="og:url" content="https://ocsxxi.github.io/2018/12/20/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84GROUP%20BY%E4%B8%8EORDER%20BY%E3%80%81WHERE%E4%B8%8EHAVING/index.html">
 <meta property="og:site_name" content="Ocsxxi">
-<meta property="og:description" content="在数据库的选择操作SELECT中经常会用到聚合条件，最常见也是最常用的是WHERE语句，故本文不会着重介绍WHERE语句。 现假设在某数据库中有一个名为PRODUCT的表，表结构及内部数据如下 12345CREATE TABLE PRODUCT(    Pno CHAR(20) PRIMARY KEY,    Pname CHAR(10),    Pamount INT); 123456789+-">
+<meta property="og:description" content="在数据库的选择操作SELECT中经常会用到聚合条件，最常见也是最常用的是WHERE语句，故本文不会着重介绍WHERE语句。 现假设在某数据库中有一个名为PRODUCT的表，表结构及内部数据如下 12345CREATE TABLE PRODUCT(    Pno CHAR(20) PRIMARY KEY,    Pname CHAR(10),    Pamount INT);">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-12-20T13:24:20.000Z">
-<meta property="article:modified_time" content="2020-10-31T09:34:26.861Z">
+<meta property="article:modified_time" content="2020-10-31T13:43:39.695Z">
 <meta property="article:author" content="Zhiyuan Alex Liu">
 <meta property="article:tag" content="数据库">
 <meta property="article:tag" content="SQL">
@@ -58,7 +58,7 @@
   <link rel="stylesheet" href="/css/bootstrap.css" >
   <link rel="stylesheet" href="/css/fashion.css" >
   <link rel="stylesheet" href="/css/glyphs.css" >
-
+  <meta name="baidu-site-verification" content="code-GpRoie4ERb" />
 <meta name="generator" content="Hexo 5.2.0"></head>
 
 
@@ -67,10 +67,32 @@
 
 
   
+  
+  <div class="site-header-image">
+    <img id="originBg" width="100%" alt="Hike News" src="">
+  </div>
+
+  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
+    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
+  </div>
+
+  <script>
+        var imgUrls = "css/images/pose01.jpg,https://source.unsplash.com/collection/954550/1920x1080,https://source.unsplash.com/collection/954550/1920x1081".split(",");
+        var random = Math.floor((Math.random() * imgUrls.length ));
+        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+          document.getElementById("originBg").src=imgUrls[random];
+          document.getElementById("blurBg").src=imgUrls[random];
+        } else {
+          document.getElementById("originBg").src='/' + imgUrls[random];
+          document.getElementById("blurBg").src='/' + imgUrls[random];
+        }
+    </script>
+
+
 
 
 <header id="allheader" class="site-header" role="banner" 
-   >
+   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
   <div class="clearfix container">
       <div class="site-branding">
 
@@ -148,7 +170,8 @@
         <p>在数据库的选择操作SELECT中经常会用到聚合条件，最常见也是最常用的是WHERE语句，故本文不会着重介绍WHERE语句。</p>
 <p>现假设在某数据库中有一个名为PRODUCT的表，表结构及内部数据如下</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> PRODUCT(</span><br><span class="line">    Pno <span class="built_in">CHAR</span>(<span class="number">20</span>) PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">    Pname <span class="built_in">CHAR</span>(<span class="number">10</span>),</span><br><span class="line">    Pamount <span class="built_in">INT</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+-----+-------+---------+</span><br><span class="line">| Pno | Pname | Pamount |</span><br><span class="line">+-----+-------+---------+</span><br><span class="line">| 001 | a     |       1 |</span><br><span class="line">| 002 | a     |       2 |</span><br><span class="line">| 003 | b     |       1 |</span><br><span class="line">| 004 | b     |       2 |</span><br><span class="line">| 005 | b     |       6 |</span><br><span class="line">+-----+-------+---------+</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+<span class="comment">-----+-------+---------+</span></span><br><span class="line">| Pno | Pname | Pamount |</span><br><span class="line">+<span class="comment">-----+-------+---------+</span></span><br><span class="line">| 001 | a     |       1 |</span><br><span class="line">| 002 | a     |       2 |</span><br><span class="line">| 003 | b     |       1 |</span><br><span class="line">| 004 | b     |       2 |</span><br><span class="line">| 005 | b     |       6 |</span><br><span class="line">+<span class="comment">-----+-------+---------+</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="ORDER-BY"><a href="#ORDER-BY" class="headerlink" title="ORDER BY"></a>ORDER BY</h3><p>这一语句主要是显示排序用，如果选择了多条类似的记录，那么在查询语句中便可用到此语句，使用如下</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> PRODUCT <span class="keyword">ORDER</span> <span class="keyword">BY</span> Pno <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure>
@@ -293,6 +316,9 @@
 
 
     <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
     
     
 </script>

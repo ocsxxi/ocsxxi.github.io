@@ -11,15 +11,15 @@
   
   
   
-  <meta name="description" content="一、古典概型 摸球问题  一把抓（无序）： 组合  逐个取（有序）：  不放回： $n\Omega$ 要逐渐减小 放回【独立】：$n\Omega$不变    抽签摸奖与次序无关：若a个中奖球，b个不中奖球，前n-1次不明确，那么第n次中奖的的概率即$\frac{a}{a+b}$  分房问题  指定 （不用选） 恰 （需要选） 人数要求   取样问题  含与不含 或与且 最大与最小    二、几何概">
+  <meta name="description" content="一、古典概型 摸球问题  一把抓（无序）： 组合  逐个取（有序）：  不放回： $n\Omega$ 要逐渐减小 放回【独立】：$n\Omega$不变    抽签摸奖与次序无关：若a个中奖球，b个不中奖球，前n-1次不明确，那么第n次中奖的的概率即$\frac{a}{a+b}$">
 <meta property="og:type" content="article">
 <meta property="og:title" content="总结-随机事件与概率">
 <meta property="og:url" content="https://ocsxxi.github.io/2020/10/30/%E6%80%BB%E7%BB%93-%E9%9A%8F%E6%9C%BA%E4%BA%8B%E4%BB%B6%E4%B8%8E%E6%A6%82%E7%8E%87/index.html">
 <meta property="og:site_name" content="Ocsxxi">
-<meta property="og:description" content="一、古典概型 摸球问题  一把抓（无序）： 组合  逐个取（有序）：  不放回： $n\Omega$ 要逐渐减小 放回【独立】：$n\Omega$不变    抽签摸奖与次序无关：若a个中奖球，b个不中奖球，前n-1次不明确，那么第n次中奖的的概率即$\frac{a}{a+b}$  分房问题  指定 （不用选） 恰 （需要选） 人数要求   取样问题  含与不含 或与且 最大与最小    二、几何概">
+<meta property="og:description" content="一、古典概型 摸球问题  一把抓（无序）： 组合  逐个取（有序）：  不放回： $n\Omega$ 要逐渐减小 放回【独立】：$n\Omega$不变    抽签摸奖与次序无关：若a个中奖球，b个不中奖球，前n-1次不明确，那么第n次中奖的的概率即$\frac{a}{a+b}$">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-10-30T09:35:02.000Z">
-<meta property="article:modified_time" content="2020-10-30T10:29:27.038Z">
+<meta property="article:modified_time" content="2020-10-31T13:39:06.106Z">
 <meta property="article:author" content="Zhiyuan Alex Liu">
 <meta property="article:tag" content="概率论与数理统计">
 <meta property="article:tag" content="数学">
@@ -56,7 +56,7 @@
   <link rel="stylesheet" href="/css/bootstrap.css" >
   <link rel="stylesheet" href="/css/fashion.css" >
   <link rel="stylesheet" href="/css/glyphs.css" >
-
+  <meta name="baidu-site-verification" content="code-GpRoie4ERb" />
 <meta name="generator" content="Hexo 5.2.0"></head>
 
 
@@ -65,10 +65,32 @@
 
 
   
+  
+  <div class="site-header-image">
+    <img id="originBg" width="100%" alt="Hike News" src="">
+  </div>
+
+  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
+    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
+  </div>
+
+  <script>
+        var imgUrls = "css/images/pose01.jpg,https://source.unsplash.com/collection/954550/1920x1080,https://source.unsplash.com/collection/954550/1920x1081".split(",");
+        var random = Math.floor((Math.random() * imgUrls.length ));
+        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+          document.getElementById("originBg").src=imgUrls[random];
+          document.getElementById("blurBg").src=imgUrls[random];
+        } else {
+          document.getElementById("originBg").src='/' + imgUrls[random];
+          document.getElementById("blurBg").src='/' + imgUrls[random];
+        }
+    </script>
+
+
 
 
 <header id="allheader" class="site-header" role="banner" 
-   >
+   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
   <div class="clearfix container">
       <div class="site-branding">
 
@@ -156,6 +178,7 @@
 </li>
 </ul>
 <p>抽签摸奖与次序无关：若a个中奖球，b个不中奖球，<strong>前n-1次不明确</strong>，那么第n次中奖的的概率即$\frac{a}{a+b}$</p>
+<a id="more"></a>
 </li>
 <li><p>分房问题</p>
 <ul>
@@ -366,6 +389,9 @@
 
 
     <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
     
     
 </script>

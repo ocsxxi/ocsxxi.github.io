@@ -11,19 +11,19 @@
   
   
   
-  <meta name="description" content="如图建立People类，并实例化一个对象p1, 报错如图 我们来详细看一下如图报错：编译器告诉我们说 People类的构造函数不能接收参数 解决办法： 使用def init(self, …)     ——&gt;注意这里的下划线是两个下划线__，而不是单个下划线_而非def init(self, …) 如图删除原来的People类 如图重新构建People类，并实例化People类对象p1通过sa">
+  <meta name="description" content="如图建立People类，并实例化一个对象p1, 报错如图">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hadoop3.2.0 启动后通过jps命令找不到JobTracker和TaskTracker">
 <meta property="og:url" content="https://ocsxxi.github.io/2019/04/14/Python%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0takes%20no%20arguments/index.html">
 <meta property="og:site_name" content="Ocsxxi">
-<meta property="og:description" content="如图建立People类，并实例化一个对象p1, 报错如图 我们来详细看一下如图报错：编译器告诉我们说 People类的构造函数不能接收参数 解决办法： 使用def init(self, …)     ——&gt;注意这里的下划线是两个下划线__，而不是单个下划线_而非def init(self, …) 如图删除原来的People类 如图重新构建People类，并实例化People类对象p1通过sa">
+<meta property="og:description" content="如图建立People类，并实例化一个对象p1, 报错如图">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190414153255727.PNG">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190414153426827.PNG">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190414153834932.PNG">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190414153915825.PNG">
 <meta property="article:published_time" content="2019-04-14T07:43:18.000Z">
-<meta property="article:modified_time" content="2020-10-31T10:05:28.051Z">
+<meta property="article:modified_time" content="2020-10-31T13:39:48.961Z">
 <meta property="article:author" content="Zhiyuan Alex Liu">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="面向对象">
@@ -61,7 +61,7 @@
   <link rel="stylesheet" href="/css/bootstrap.css" >
   <link rel="stylesheet" href="/css/fashion.css" >
   <link rel="stylesheet" href="/css/glyphs.css" >
-
+  <meta name="baidu-site-verification" content="code-GpRoie4ERb" />
 <meta name="generator" content="Hexo 5.2.0"></head>
 
 
@@ -70,10 +70,32 @@
 
 
   
+  
+  <div class="site-header-image">
+    <img id="originBg" width="100%" alt="Hike News" src="">
+  </div>
+
+  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
+    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
+  </div>
+
+  <script>
+        var imgUrls = "css/images/pose01.jpg,https://source.unsplash.com/collection/954550/1920x1080,https://source.unsplash.com/collection/954550/1920x1081".split(",");
+        var random = Math.floor((Math.random() * imgUrls.length ));
+        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+          document.getElementById("originBg").src=imgUrls[random];
+          document.getElementById("blurBg").src=imgUrls[random];
+        } else {
+          document.getElementById("originBg").src='/' + imgUrls[random];
+          document.getElementById("blurBg").src='/' + imgUrls[random];
+        }
+    </script>
+
+
 
 
 <header id="allheader" class="site-header" role="banner" 
-   >
+   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
   <div class="clearfix container">
       <div class="site-branding">
 
@@ -148,7 +170,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>如图建立People类，并实例化一个对象p1, 报错如图<br><img src="https://img-blog.csdnimg.cn/20190414153255727.PNG"></p>
+        <p>如图建立People类，并实例化一个对象p1, 报错如图<br><img src="https://img-blog.csdnimg.cn/20190414153255727.PNG"><br> <a id="more"></a></p>
 <p>我们来详细看一下如图报错：编译器告诉我们说 People类的构造函数不能接收参数<br><img src="https://img-blog.csdnimg.cn/20190414153426827.PNG"></p>
 <p><strong>解决办法</strong>：</p>
 <p><strong>使用def <strong>init</strong>(self, …)</strong>     ——&gt;注意这里的下划线是两个下划线__，而不是单个下划线_<br><strong>而非def <em>init</em>(self, …)</strong></p>
@@ -279,6 +301,9 @@
 
 
     <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
     
     
 </script>
