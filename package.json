@@ -1,0 +1,21 @@
+{
+  "name": "ocsxxi.github.io",
+  "version": "1.0.0",
+  "description": "My Personal Blog",
+  "author": "ocsxxi",
+  "license": "CC-BY-SA-4.0",
+  "scripts": {
+    "dev": "vuepress dev blog",
+    "build": "vuepress build blog"
+  },
+  "devDependencies": {
+    "@vuepress/theme-blog": "^2.3.3",
+    "mathjax-full": "^3.1.4",
+    "vuepress": "^1.9.7",
+    "vuepress-plugin-mathjax": "^1.2.8",
+    "vuepress-plugin-sitemap": "^2.3.1"
+  },
+  "dependencies": {
+    
+  }
+}

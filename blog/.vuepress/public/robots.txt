@@ -1,0 +1,3 @@
+Sitemap: https://www.ocsxxi.top/sitemap.xml
+
+User-agent: *
