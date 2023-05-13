@@ -1,4 +1,5 @@
 let ocsxxi_top = {
+  dest: "docs",
   title: "ocsxxi", // Title for the site. This will be displayed in the navbar.
   description: "凭借着这份光，我便能把黑夜当成白天。",
   theme: "@vuepress/theme-blog",
