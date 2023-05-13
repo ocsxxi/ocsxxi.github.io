@@ -24,7 +24,7 @@ let ocsxxi_top = {
       })();
       `,
     ],
-    
+
   ],
 
   themeConfig: {
@@ -227,4 +227,4 @@ let ocsxxi_github_io = {
 };
 
 // ---------------------------------------------------------------------------------------------------
-module.exports = ocsxxi_github_io
+module.exports = ocsxxi_top
