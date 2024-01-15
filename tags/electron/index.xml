@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Electron on Ocsxxi&#39;s Blog</title>
+    <link>https://ocsxxi.top/tags/electron/</link>
+    <description>Recent content in Electron on Ocsxxi&#39;s Blog</description>
+    <image>
+      <title>Ocsxxi&#39;s Blog</title>
+      <url>https://ocsxxi.top/images/papermod-cover.png</url>
+      <link>https://ocsxxi.top/images/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 12 May 2023 10:42:00 +0000</lastBuildDate>
+    <atom:link href="https://ocsxxi.top/tags/electron/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>无边框Electron拖动时窗口大小发生改变解决方法</title>
+      <link>https://ocsxxi.top/posts/2023-05-13-1/</link>
+      <pubDate>Fri, 12 May 2023 10:42:00 +0000</pubDate>
+      <guid>https://ocsxxi.top/posts/2023-05-13-1/</guid>
+      <description>背景 根据网络搜索引擎提供的解决方法，如 electron无边框模式完美解决同时实现拖动和双击最大化等，发现了：添加代码后，拖动窗口时窗口移动，但同时窗口大小发生意想不到的改变。
+解决 考虑到计算机图形是为了在屏幕上显示点阵图像，计算中会产生精度误差，从而导致图形抖动。
+尝试移动窗口前记录窗口尺寸，移动后重设窗口尺寸
+1 2 3 let oldsize = mainWindow.getSize() ... mainWindow.setSize(oldsize.width, oldsize.height) 运行尝试，并未达到预期效果。窗口大小仍然会发生大幅改变。
+网络上搜索不到相关内容，只能无尽的查api，发现另一个函数 xxxBounds()：
+1 2 3 4 5 let oldBounds = mainWindow.getBounds() ... oldBounds.x = x oldBounds.y = y mainWindow.setBounds(oldBounds, true) 注意这个函数与xxxSize()之间的差异，getBounds()会返回一个四个属性的对象，属性值分别为x-&amp;gt;x坐标，y-&amp;gt;y坐标，width-&amp;gt;窗口宽度，height-&amp;gt;窗口高度。
+所以在示例中将移动目标点的(x,y)坐标赋值修改至oldBounds，这样通过setBounds函数同时维护窗口的位置及维度。
+运行尝试，成功，窗口大小不会再发生大幅改变。试着读取窗口大小，变化幅度仅为1像素，长期拖动也不会出现问题。 出现该问题，并且搜不到相关问题解决方案，原因可能是我计算机的显示设置-缩放与布局设置的是125%（仅作猜想，未经验证！）</description>
+    </item>
+  </channel>
+</rss>

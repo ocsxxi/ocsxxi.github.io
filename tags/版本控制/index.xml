@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>版本控制 on Ocsxxi&#39;s Blog</title>
+    <link>https://ocsxxi.top/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/</link>
+    <description>Recent content in 版本控制 on Ocsxxi&#39;s Blog</description>
+    <image>
+      <title>Ocsxxi&#39;s Blog</title>
+      <url>https://ocsxxi.top/images/papermod-cover.png</url>
+      <link>https://ocsxxi.top/images/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 05 Mar 2019 13:55:49 +0000</lastBuildDate>
+    <atom:link href="https://ocsxxi.top/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>版本库——Git初探</title>
+      <link>https://ocsxxi.top/posts/2019-03-05-1/</link>
+      <pubDate>Tue, 05 Mar 2019 13:55:49 +0000</pubDate>
+      <guid>https://ocsxxi.top/posts/2019-03-05-1/</guid>
+      <description>Git是一个简便的版本控制工具，初期使用一般是通过Git Bash来进行使用，以便于记住Git命令，后期一般通过Git GUI来进行使用，可以更加方便快捷地管理版本库。（ 版本库(repository)，也称仓库，是用于存储不同版本信息、以及文件的仓库）
+Git环境需要进行本地安装，官网https://git-scm.com/，通过自己的操作系统来选择合适的安装包进行下载安装并进行初始配置。
+如在windows系统下，想将桌面的test文件夹作为某次开发的仓库，可以双击打开test文件夹，在空白处右键选择“git bash here”
+即可打开bash命令行，然后直接在bash命令行中键入
+1 git init 如果反馈信息如下，并在下一行等待输入，即创建版本库成功
+1 Initialized empty Git repository in C:/Users/Admin/Desktop/test/.git/ 在test目录内创建rd.txt文本文件，并在其中写入”hello world”
+继续在git bash 命令行中键入命令
+1 git add rd.txt 这行命令的作用是将rd.txt作为预备提交文件进行添加
+如果如下显示，则添加成功
+接下来进行第一次提交，使用命令如下
+1 git commit -m &amp;#34;&amp;lt;提交说明&amp;gt;&amp;#34; &amp;lt;提交说明&amp;gt;可以更改为自己的说明，如果显示如下，则提交成功
+我们再将rd.txt进行一次修改，再进行第二次提交
+然后我们现在可以键入以下命令，来查看当前仓库的日志
+1 git log 如下所示
+在黄色的commit后面长长的一串码是对应版本的版本号
+我们现在假设产品经理告诉我们，第二次的修改是没有用的，那么我们就需要将版本回滚到第一版，也就是”my first commit”那一版，我们可以键入下面的命令
+1 git reset --hard HEAD^ 可以看到反馈了如下信息
+并且rd.txt和git log命令中，均只剩下第一次提交的内容，如下所示
+这样就说明了我们回滚操作成功了
+现在再假设产品经理告诉我们，他看错了，第二次修改的内容是需要的，那么这样我们就要退回回滚操作之前，只要当前bash命令行没有关闭，并且我们还能查到第二次的版本id，那么我们就能退回回滚操作之前，命令如下
+1 git reset --hard &amp;lt;版本号&amp;gt; &amp;lt;版本号&amp;gt;应该填写自己命令行中的第二次提交的版本id，如下
+看到这里，有很多小伙伴就会迷茫了，会问：刚才显示的第二次的版本id不是116b28f9460a5a0222ef0328c0c76e3c3fc95121吗？为什么我只写了一个116b2？
+这是因为git的控制机制来说，我们只要能够给bash一个可以辨识到独一无二的版本号的序列，那么它就可以自动为我们匹配到我们想要去使用的版本号。
+使用退回命令后，rd.txt内容显示如下，即表明我们的退回回滚操作之前的操作成功。
+感谢您的阅读</description>
+    </item>
+  </channel>
+</rss>

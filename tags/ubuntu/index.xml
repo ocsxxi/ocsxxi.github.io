@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>UBUNTU on Ocsxxi&#39;s Blog</title>
+    <link>https://ocsxxi.top/tags/ubuntu/</link>
+    <description>Recent content in UBUNTU on Ocsxxi&#39;s Blog</description>
+    <image>
+      <title>Ocsxxi&#39;s Blog</title>
+      <url>https://ocsxxi.top/images/papermod-cover.png</url>
+      <link>https://ocsxxi.top/images/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 05 Apr 2019 09:44:39 +0000</lastBuildDate>
+    <atom:link href="https://ocsxxi.top/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu Server安装后无法进入root超级用户解决办法</title>
+      <link>https://ocsxxi.top/posts/2019-04-05-1/</link>
+      <pubDate>Fri, 05 Apr 2019 09:44:39 +0000</pubDate>
+      <guid>https://ocsxxi.top/posts/2019-04-05-1/</guid>
+      <description>因为要学习Hadoop的缘故，用VMware给自己装了个Ubuntu Server，版本是18.04.2-amd64
+因为之前使用的Ubuntu Desktop版本都是安装时候设置用户的时候，用户和超级用户是同一个密码，因为是学习用，也没有太在意这些，但是这次安装成功以后居然不能用用户的密码登录超级用户，也搜了一小段时间的解决办法。
+最终，给出如下解决方案：
+先使用安装时创建的用户登录进系统
+在控制台输入”sudo passwd”
+提示输入用户密码
+为root输入密码与确认密码
+成功后shell会提示”passwd: password updated successfully”，就可以使用密码登录超级用户了
+附上我自己成功为root用户添加密码的图片
+参考: https://www.cnblogs.com/yuejin/p/3645294.html</description>
+    </item>
+  </channel>
+</rss>

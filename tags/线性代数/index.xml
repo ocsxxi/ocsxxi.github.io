@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>线性代数 on Ocsxxi&#39;s Blog</title>
+    <link>https://ocsxxi.top/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/</link>
+    <description>Recent content in 线性代数 on Ocsxxi&#39;s Blog</description>
+    <image>
+      <title>Ocsxxi&#39;s Blog</title>
+      <url>https://ocsxxi.top/images/papermod-cover.png</url>
+      <link>https://ocsxxi.top/images/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 20 Dec 2020 15:25:00 +0000</lastBuildDate>
+    <atom:link href="https://ocsxxi.top/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>线性代数公式定理 (李永乐版)</title>
+      <link>https://ocsxxi.top/posts/2020-12-20-1/</link>
+      <pubDate>Sun, 20 Dec 2020 15:25:00 +0000</pubDate>
+      <guid>https://ocsxxi.top/posts/2020-12-20-1/</guid>
+      <description>公式 行列式 $|A| = a_{i1}A_{i1}+a_{i2}A_{i2}+…+a_{in}A_{in}(按行展开)$
+$\quad \ = a_{1j}A_{1j}+a_{2j}A_{2j}+…+a_{nj}A_{nj}(按行展开)$
+特别的
+（1）上、下三角行列式：主对角元素的乘积
+$$ \left|\begin{matrix} &amp;amp; a_{12} &amp;amp; &amp;amp; \cdots &amp;amp; a_{1n} \\ &amp;amp; &amp;amp; a_{22} &amp;amp; \cdots &amp;amp;a_{2n} \\ &amp;amp; &amp;amp; &amp;amp; \ddots &amp;amp; \vdots \\ &amp;amp; &amp;amp; &amp;amp; &amp;amp;a_{nn}\end{matrix}\right|=\left|\begin{matrix}a_{11} &amp;amp; &amp;amp; &amp;amp; \\a_{21} &amp;amp; a_{22} &amp;amp; &amp;amp; \\\vdots &amp;amp; &amp;amp; \ddots &amp;amp; \\a_{n1} &amp;amp; a_{n2} &amp;amp; \cdots &amp;amp;a_{nn}\end{matrix}\right|=\left|\begin{matrix}a_{11} &amp;amp; &amp;amp; &amp;amp; \\ &amp;amp; a_{22} &amp;amp; &amp;amp; \\ &amp;amp; &amp;amp; \ddots &amp;amp; \\ &amp;amp; &amp;amp; &amp;amp;a_{nn}a_{11}\end{matrix}\right| $$</description>
+    </item>
+  </channel>
+</rss>

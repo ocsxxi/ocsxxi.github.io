@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>REACT NATIVE on Ocsxxi&#39;s Blog</title>
+    <link>https://ocsxxi.top/tags/react-native/</link>
+    <description>Recent content in REACT NATIVE on Ocsxxi&#39;s Blog</description>
+    <image>
+      <title>Ocsxxi&#39;s Blog</title>
+      <url>https://ocsxxi.top/images/papermod-cover.png</url>
+      <link>https://ocsxxi.top/images/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 24 Apr 2019 14:35:13 +0000</lastBuildDate>
+    <atom:link href="https://ocsxxi.top/tags/react-native/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>React Native 500报错指向 &#39;&lt;&#39;</title>
+      <link>https://ocsxxi.top/posts/2019-04-24-2/</link>
+      <pubDate>Wed, 24 Apr 2019 14:35:13 +0000</pubDate>
+      <guid>https://ocsxxi.top/posts/2019-04-24-2/</guid>
+      <description>前提： 配置好了React Native并且按照官网的教程，生成了我的AwesomeProject，并且成功运行。
+复现 接下来按照官网教程生成 Hello World程序，代码如下
+1 2 3 4 5 6 7 8 9 10 11 12 import React, { Component } from &amp;#39;react&amp;#39;; import { Text, View } from &amp;#39;react-native&amp;#39;; export default class HelloWorldApp extends Component { render() { return ( &amp;lt;View style={{ flex: 1, justifyContent: &amp;#34;center&amp;#34;, alignItems: &amp;#34;center&amp;#34; }}&amp;gt; &amp;lt;Text&amp;gt;Hello, world!&amp;lt;/Text&amp;gt; &amp;lt;/View&amp;gt; ); } } 将上面的代码覆盖App.js后，在命令行中输入：
+1 react-native run-android 虚拟机反馈报错500，并在cmd中用红色的^指向return中第一个View的开始符号“&amp;lt;”
+解决 关闭含有server的窗口，重新输入命令：
+1 react-native start 然后将应用部署至虚拟机，输入命令：</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数学 on Ocsxxi&#39;s Blog</title>
+    <link>https://ocsxxi.top/tags/%E6%95%B0%E5%AD%A6/</link>
+    <description>Recent content in 数学 on Ocsxxi&#39;s Blog</description>
+    <image>
+      <title>Ocsxxi&#39;s Blog</title>
+      <url>https://ocsxxi.top/images/papermod-cover.png</url>
+      <link>https://ocsxxi.top/images/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 20 Dec 2020 15:25:00 +0000</lastBuildDate>
+    <atom:link href="https://ocsxxi.top/tags/%E6%95%B0%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>线性代数公式定理 (李永乐版)</title>
+      <link>https://ocsxxi.top/posts/2020-12-20-1/</link>
+      <pubDate>Sun, 20 Dec 2020 15:25:00 +0000</pubDate>
+      <guid>https://ocsxxi.top/posts/2020-12-20-1/</guid>
+      <description>公式 行列式 $|A| = a_{i1}A_{i1}+a_{i2}A_{i2}+…+a_{in}A_{in}(按行展开)$
+$\quad \ = a_{1j}A_{1j}+a_{2j}A_{2j}+…+a_{nj}A_{nj}(按行展开)$
+特别的
+（1）上、下三角行列式：主对角元素的乘积
+$$ \left|\begin{matrix} &amp;amp; a_{12} &amp;amp; &amp;amp; \cdots &amp;amp; a_{1n} \\ &amp;amp; &amp;amp; a_{22} &amp;amp; \cdots &amp;amp;a_{2n} \\ &amp;amp; &amp;amp; &amp;amp; \ddots &amp;amp; \vdots \\ &amp;amp; &amp;amp; &amp;amp; &amp;amp;a_{nn}\end{matrix}\right|=\left|\begin{matrix}a_{11} &amp;amp; &amp;amp; &amp;amp; \\a_{21} &amp;amp; a_{22} &amp;amp; &amp;amp; \\\vdots &amp;amp; &amp;amp; \ddots &amp;amp; \\a_{n1} &amp;amp; a_{n2} &amp;amp; \cdots &amp;amp;a_{nn}\end{matrix}\right|=\left|\begin{matrix}a_{11} &amp;amp; &amp;amp; &amp;amp; \\ &amp;amp; a_{22} &amp;amp; &amp;amp; \\ &amp;amp; &amp;amp; \ddots &amp;amp; \\ &amp;amp; &amp;amp; &amp;amp;a_{nn}a_{11}\end{matrix}\right| $$</description>
+    </item>
+    <item>
+      <title>总结-随机事件与概率</title>
+      <link>https://ocsxxi.top/posts/2020-10-30-1/</link>
+      <pubDate>Fri, 30 Oct 2020 09:35:02 +0000</pubDate>
+      <guid>https://ocsxxi.top/posts/2020-10-30-1/</guid>
+      <description>一、古典概型 摸球问题
+一把抓（无序）： 组合
+逐个取（有序）：
+不放回： $n\Omega$ 要逐渐减小 放回【独立】：$n\Omega$不变 抽签摸奖与次序无关：若a个中奖球，b个不中奖球，前n-1次不明确，那么第n次中奖的的概率即$\frac{a}{a+b}$
+分房问题
+指定 （不用选） 恰 （需要选） 人数要求 取样问题
+含与不含 或与且 最大与最小 二、几何概型 长度、面积、体积的比值
+三、事件的运算 包含、相等、和、积、差、互不相容、对立
+$P(A-B)=P(A\bar{B})=P(A)-P(AB)$
+互不相容 ：$AB=\phi$
+对立 ：$AB=\phi$ 且 $A+B=\Omega$ ( P(AB)=P($\bar{A}\bar{B}$) )
+互不相容 $\overset{\nrightarrow}{\leftarrow}$ 对立
+事件关系 $\overset{\nleftarrow}{\rightarrow}$ 概率关系
+概率等式关系
+$P(AB)\overset{独立}{=}P(A)P(B)$ P($A_先B_后$) $\overset{乘}{=}$ P(A) P(B|A) P(AB) $\overset{加}{=}$ P(A) + P(B) -P(A+B) P(AB) $\overset{减}{=}$ P(A) - P(A$\bar{B}$) = P(B) - P($\bar{A}$B) P(AB) $\overset{对立}{=}$ 1 - P($\overline{AB}$) = 1 - P($\bar{A} \bigcup \bar{B}$) 四、概率不等式关系 0 $\leq$ P(A) $\leq$ 1 A$\subset$B $\Longrightarrow$ P(A) $\leq$ P(B) P(B|A) &amp;gt; P(AB) AB $\subseteq$ A $\Longrightarrow$ P(AB) $\leq$ P(A)</description>
+    </item>
+  </channel>
+</rss>

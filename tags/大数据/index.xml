@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>大数据 on Ocsxxi&#39;s Blog</title>
+    <link>https://ocsxxi.top/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/</link>
+    <description>Recent content in 大数据 on Ocsxxi&#39;s Blog</description>
+    <image>
+      <title>Ocsxxi&#39;s Blog</title>
+      <url>https://ocsxxi.top/images/papermod-cover.png</url>
+      <link>https://ocsxxi.top/images/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 14 Apr 2019 07:12:30 +0000</lastBuildDate>
+    <atom:link href="https://ocsxxi.top/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hadoop3.2.0 启动后通过jps命令找不到JobTracker和TaskTracker</title>
+      <link>https://ocsxxi.top/posts/2019-04-14-1/</link>
+      <pubDate>Sun, 14 Apr 2019 07:12:30 +0000</pubDate>
+      <guid>https://ocsxxi.top/posts/2019-04-14-1/</guid>
+      <description>原因是Hadoop2.0以后的版本采用的是 YARN 作为资源管理器，包含了1.x版本的JobTracker和TaskTracker功能，
+即 YARN 替代了单独存在的 JobTracker 与 TaskTracker。
+2.0之后的版本，安装配置成功后启动Hadoop后，通过jps命令将如图只显示以下几个进程
+参考：https://blog.csdn.net/ASN_forever/article/details/81062238</description>
+    </item>
+  </channel>
+</rss>

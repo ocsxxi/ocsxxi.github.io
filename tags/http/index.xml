@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>http on Ocsxxi&#39;s Blog</title>
+    <link>https://ocsxxi.top/tags/http/</link>
+    <description>Recent content in http on Ocsxxi&#39;s Blog</description>
+    <image>
+      <title>Ocsxxi&#39;s Blog</title>
+      <url>https://ocsxxi.top/images/papermod-cover.png</url>
+      <link>https://ocsxxi.top/images/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 02 Apr 2022 17:06:00 +0000</lastBuildDate>
+    <atom:link href="https://ocsxxi.top/tags/http/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>踩着油门建立的http连接——nginx开启http2</title>
+      <link>https://ocsxxi.top/posts/2022-04-02-2/</link>
+      <pubDate>Sat, 02 Apr 2022 17:06:00 +0000</pubDate>
+      <guid>https://ocsxxi.top/posts/2022-04-02-2/</guid>
+      <description>页面访问慢，架了cdn也没用？试试http2吧。
+以前的http连接，单次连接都是访问单个资源，http2就是在http连接的基础上，直接复用第一次建立http连接时的网络通路，不用每一次都要&amp;quot;三次挥手&amp;quot;啦。
+解决 原server的监听端口配置如下
+1 2 - listen 443 ssl; + listen 443 ssl http2; 即可开启http2的使用之旅啦。
+注 记得保证使用的nginx编译包含了with-http_v2_module模块，并且要保证同时启用ssl与http2。
+如果是通过
+1 apt install nginx 方式安装的nginx，那么通常来说已经默认编译包含了http2这个模块。
+如果不能确定是否包含了这个模块，则可以使用
+1 nginx -V 这个命令来查看自己使用的nginx是否编译包含了这个模块。</description>
+    </item>
+  </channel>
+</rss>

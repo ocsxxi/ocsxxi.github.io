@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JMETER on Ocsxxi&#39;s Blog</title>
+    <link>https://ocsxxi.top/tags/jmeter/</link>
+    <description>Recent content in JMETER on Ocsxxi&#39;s Blog</description>
+    <image>
+      <title>Ocsxxi&#39;s Blog</title>
+      <url>https://ocsxxi.top/images/papermod-cover.png</url>
+      <link>https://ocsxxi.top/images/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 31 Jul 2019 07:56:49 +0000</lastBuildDate>
+    <atom:link href="https://ocsxxi.top/tags/jmeter/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JMeter断言不提示错误信息</title>
+      <link>https://ocsxxi.top/posts/2019-07-31-1/</link>
+      <pubDate>Wed, 31 Jul 2019 07:56:49 +0000</pubDate>
+      <guid>https://ocsxxi.top/posts/2019-07-31-1/</guid>
+      <description>问题描述 因为工作需要，所以自己参考了 https://blog.csdn.net/u012111923/article/details/80705141#comments 大佬的教程，根据教程进行了一次测试。
+在其中，我发现断言无论如何都不会显示，如下图
+即使是在View Results Tree里全部通过如下图，断言也均不显示
+解决方法 是因为JMeter的机制，在断言成功的状态下并不会显示断言是否成功，仅会在断言失败的情况下才会显示错误信息。
+接下来，在Response Assertions的界面上，随便打一段匹配文本上去，让它进行匹配，如下图所示
+现在点击运行，我们再来看看断言结果
+这不就是我们期待已久的断言结果吗，哈哈</description>
+    </item>
+  </channel>
+</rss>

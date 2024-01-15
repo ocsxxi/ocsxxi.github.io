@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>微信小程序 on Ocsxxi&#39;s Blog</title>
+    <link>https://ocsxxi.top/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/</link>
+    <description>Recent content in 微信小程序 on Ocsxxi&#39;s Blog</description>
+    <image>
+      <title>Ocsxxi&#39;s Blog</title>
+      <url>https://ocsxxi.top/images/papermod-cover.png</url>
+      <link>https://ocsxxi.top/images/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 07 Jun 2022 22:00:00 +0000</lastBuildDate>
+    <atom:link href="https://ocsxxi.top/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>微信小程序重新进入页面后自动播放视频不重播</title>
+      <link>https://ocsxxi.top/posts/2022-06-07-1/</link>
+      <pubDate>Tue, 07 Jun 2022 22:00:00 +0000</pubDate>
+      <guid>https://ocsxxi.top/posts/2022-06-07-1/</guid>
+      <description>背景 有需求如下
+打开某页面后在背景中自动播放视频，在页面不变，切出小程序后，再切回小程序，页面重新自动播放视频
+在编写之后，发现微信自身的配置并不能支持在小程序不销毁的情况下，在重新打开页面的时候重新播放视频
+解决 考虑到是否可以利用页面周期事件onHide与onShow，配合调用视频播放api进行播放
+编写onHide与onShow事件函数如下，假设videoContext是在onReady函数中已经获取好的视频组件句柄
+1 2 3 4 5 6 7 8 9 10 onHide() { this.pagehide = true }, onShow() { wx.hideHomeButton() if(this.pagehide){ this.videoContext.play() this.pagehide = false } }, 运行尝试，并未达到预期效果
+恍惚间想起之前项目中碰到的微信小程序的坑，可能在当时重新打开微信小程序的一瞬间，句柄不能正常使用，尝试修改代码如下
+1 2 3 4 5 6 7 8 9 10 11 12 onHide() { this.pagehide = true }, onShow() { wx.hideHomeButton() if(this.pagehide){ this.$nextTick(()=&amp;gt;{ this.videoContext.play() }) this.pagehide = false } }, 运行尝试，这次发现有几率能够在重新打开页面时，恍惚间想起之前项目中碰到的微信小程序的解决方式，尝试修改代码如下 1 2 3 4 5 6 7 8 9 10 onHide() { this.</description>
+    </item>
+    <item>
+      <title>微信小程序点击变更样式难设置</title>
+      <link>https://ocsxxi.top/posts/2022-04-04-2/</link>
+      <pubDate>Mon, 04 Apr 2022 01:19:00 +0000</pubDate>
+      <guid>https://ocsxxi.top/posts/2022-04-04-2/</guid>
+      <description>背景 相信很多老前端做微信小程序点击样式的时候，都喜欢直接搁样式里:hover,:focus,:active三连，还有些时候真机调试压根没反应，
+时间长了，代码维护起来又累又辛苦。
+解决 多给组件设置一个hover-class，微信官方专门留给点击样式的。相关css代码全局写一个都够用了，妈妈再也不用担心我的样式表五米长了
+1 2 3 &amp;lt;view class=&amp;#34;...&amp;#34; hover-class=&amp;#34;...&amp;#34;&amp;gt; &amp;lt;!-- 子组件 --&amp;gt; &amp;lt;/view&amp;gt; 其实还可以配合hover-stop-propagation属性使用，该属性接受布尔值，默认为false。如果设置为true则会阻止事件冒泡给父组件，可以有效提升代码执行速度。
+读文档要认真！
+嗯，吃一堑长一智，以后要尽量不以先入为主的观念看问题。</description>
+    </item>
+    <item>
+      <title>微信小程序设置动画API后图片闪动并且延迟高的解决方法</title>
+      <link>https://ocsxxi.top/posts/2022-04-04-1/</link>
+      <pubDate>Mon, 04 Apr 2022 01:11:00 +0000</pubDate>
+      <guid>https://ocsxxi.top/posts/2022-04-04-1/</guid>
+      <description>问题背景 如下方代码所示，该段代码在微信开发者工具内动画正常且流畅，但运行在ios设备中运行时发生动画卡顿，难以触发动画，且时常发生卡顿。
+1 2 3 &amp;lt;view animation={{animation}}&amp;gt; &amp;lt;img src=&amp;#34;...&amp;#34; mode=&amp;#34;widthFix&amp;#34; style=&amp;#34;width: 100%&amp;#34;/&amp;gt; &amp;lt;/view&amp;gt; 尝试解决的思路 把相同动画应用到文本按键上，在ios设备中运行时，按键动画展示丝滑且无闪烁，考虑是内容的问题。
+尝试将image组件更换为cover-image组件。我所设置的view外层有一个圆角，并且有一个缩放动画，在更改完组件后，圆角消失，动画变为了偏移而非缩放，也就是说小程序的animation变形并未作用到cover组件上，放弃这条路。
+（在微信官方文档中无论是在cover系列组件的章节，还是animation的章节，均未提到其是剥离文档流而存在这件事，算是个坑，也可呢是官方没想到会有人这么玩吧）
+尝试使用background-image样式来替换image组件，成功。 最终解决方案 把image图片设置未外层view的background-image就能完美解决了，亲测有效，在ios设备上展示丝滑，且不会发生图片闪烁。</description>
+    </item>
+  </channel>
+</rss>

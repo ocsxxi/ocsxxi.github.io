@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ssi on Ocsxxi&#39;s Blog</title>
+    <link>https://ocsxxi.top/tags/ssi/</link>
+    <description>Recent content in ssi on Ocsxxi&#39;s Blog</description>
+    <image>
+      <title>Ocsxxi&#39;s Blog</title>
+      <url>https://ocsxxi.top/images/papermod-cover.png</url>
+      <link>https://ocsxxi.top/images/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 02 Apr 2022 10:50:00 +0000</lastBuildDate>
+    <atom:link href="https://ocsxxi.top/tags/ssi/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>html组件化的必由之路——nginx开启ssi</title>
+      <link>https://ocsxxi.top/posts/2022-04-02-1/</link>
+      <pubDate>Sat, 02 Apr 2022 10:50:00 +0000</pubDate>
+      <guid>https://ocsxxi.top/posts/2022-04-02-1/</guid>
+      <description>配置背景 大多数项目中，都会有没办法使用前端工程化方法维护的html页面，或者使用jade/pug(下文统称pug)技术来维护这些html页面。
+其实pug技术也不是全能的，毕竟还要经过一次编译，对本地环境需要有node.js的要求。
+对于不方便安装node.js的机器，开启nginx/httpd的ssi配置项能够极大的提高代码的可重用性。
+配置方法，以nginx为例 nginx是使用配置文件来描述提供服务的项目，对于那些需要开启ssi配置项的项目，可以在对应的server描述中添加下列配置项：
+ssi on; ssi_silent_errors off; ssi_types text/html; 重启nginx或重载nginx配置项后，ssi功能便启用啦，详细的配置项字段值参考nginx文档https://nginx.org/en/docs/http/ngx_http_ssi_module.html
+ssi的使用方法 他的使用方法，建议参考php的文件引入，两者功能很相似。
+&amp;lt;!-- #include file=&amp;#34;文件名称&amp;#34; --&amp;gt; &amp;lt;!-- #include virtual=&amp;#34;文件名称&amp;#34; --&amp;gt; file描述的是服务器上的绝对路径 virtual描述的是相对于服务器根目录的相对路径
+正确的使用ssi会极大的降低html的可维护性，读者可以自行尝试多种可能性，比如网站主题换肤(所有html共用模板文件，共同引入主题样式文件；或者引入子文件夹中的主题样式文件)。
+虽然ssi不能像webcomponent或pug那样灵活，但是相较于纯html项目来说已经是前进了一大步。</description>
+    </item>
+  </channel>
+</rss>
