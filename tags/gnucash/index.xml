@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GnuCash on Ocsxxi&#39;s Blog</title>
+    <link>https://ocsxxi.top/tags/gnucash/</link>
+    <description>Recent content in GnuCash on Ocsxxi&#39;s Blog</description>
+    <image>
+      <title>Ocsxxi&#39;s Blog</title>
+      <url>https://ocsxxi.top/images/papermod-cover.png</url>
+      <link>https://ocsxxi.top/images/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 01 Oct 2026 12:00:00 +0800</lastBuildDate>
+    <atom:link href="https://ocsxxi.top/tags/gnucash/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GnuCash期间科目余额变动表</title>
+      <link>https://ocsxxi.top/posts/2026-10-01-1/</link>
+      <pubDate>Thu, 01 Oct 2026 12:00:00 +0800</pubDate>
+      <guid>https://ocsxxi.top/posts/2026-10-01-1/</guid>
+      <description>因个人记录自己的账目时发现GnuCash官方的试算表不能体现期间账目变化情况，故进行报表设计并使用WorkBuddy实现并完成人工测试。</description>
+    </item>
+  </channel>
+</rss>

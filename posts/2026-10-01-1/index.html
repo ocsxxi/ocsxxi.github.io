@@ -1,0 +1,340 @@
+<!doctype html><html lang=zh dir=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>GnuCash期间科目余额变动表 | Ocsxxi's Blog</title>
+<meta name=keywords content="GnuCash,财务管理"><meta name=description content="因个人记录自己的账目时发现GnuCash官方的试算表不能体现期间账目变化情况，故进行报表设计并使用WorkBuddy实现并完成人工测试。"><meta name=author content="ocsxxi"><link rel=canonical href=https://ocsxxi.top/posts/2026-10-01-1/><link crossorigin=anonymous href=/assets/css/stylesheet.b609c58d5c11bb90b1a54e04005d74ad1ddf22165eb79f5533967e57df9c3b50.css integrity="sha256-tgnFjVwRu5CxpU4EAF10rR3fIhZet59VM5Z+V9+cO1A=" rel="preload stylesheet" as=style><link rel=icon href=https://ocsxxi.top/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://ocsxxi.top/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://ocsxxi.top/favicon-32x32.png><link rel=apple-touch-icon href=https://ocsxxi.top/apple-touch-icon.png><link rel=mask-icon href=https://ocsxxi.top/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh href=https://ocsxxi.top/posts/2026-10-01-1/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><meta name=baidu-site-verification content="code-ddD2S8XpRf"><script>var _hmt=_hmt||[];(function(){var e,t=document.createElement("script");t.src="https://hm.baidu.com/hm.js?8a0f05288bca9e417055b48d31936835",e=document.getElementsByTagName("script")[0],e.parentNode.insertBefore(t,e)})()</script><meta property="og:title" content="GnuCash期间科目余额变动表"><meta property="og:description" content="因个人记录自己的账目时发现GnuCash官方的试算表不能体现期间账目变化情况，故进行报表设计并使用WorkBuddy实现并完成人工测试。"><meta property="og:type" content="article"><meta property="og:url" content="https://ocsxxi.top/posts/2026-10-01-1/"><meta property="og:image" content="https://ocsxxi.top/images/papermod-cover.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-10-01T12:00:00+08:00"><meta property="article:modified_time" content="2026-10-01T12:00:00+08:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://ocsxxi.top/images/papermod-cover.png"><meta name=twitter:title content="GnuCash期间科目余额变动表"><meta name=twitter:description content="因个人记录自己的账目时发现GnuCash官方的试算表不能体现期间账目变化情况，故进行报表设计并使用WorkBuddy实现并完成人工测试。"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://ocsxxi.top/posts/"},{"@type":"ListItem","position":2,"name":"GnuCash期间科目余额变动表","item":"https://ocsxxi.top/posts/2026-10-01-1/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"GnuCash期间科目余额变动表","name":"GnuCash期间科目余额变动表","description":"因个人记录自己的账目时发现GnuCash官方的试算表不能体现期间账目变化情况，故进行报表设计并使用WorkBuddy实现并完成人工测试。","keywords":["GnuCash","财务管理"],"articleBody":"在多个软件对账的时候需要看到特定期间的科目账目变动统计情况，而GnuCash官方并未提供类似报表，故进行报表设计并使用WorkBuddy实现，经人工测试，该报表在GnuCash 5.16显示正常，其他版本未测试。\n该报表每行包含单个科目的科目代码、科目名称、期初余额、当期借合计、当期贷合计、期末余额，如有需要请自取。\n报表文件 文件名称：account-change-summary.scm\n;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;; 科目余额变动表 / Account Change Summary ;; ;; 一个符合 GnuCash 报表规范的自定义报表（适配 GnuCash 5.x，已在 5.16 验证 API）。 ;; 针对用户在选项中选定的【会计期间】与【科目】，逐科目汇总： ;; 期初余额 (opening balance) —— 期间开始前该科目的余额 ;; 当期借方 (period debit) —— 期间内该科目的借方发生额 ;; 当期贷方 (period credit) —— 期间内该科目的贷方发生额 ;; 期末余额 (closing balance) —— 期初余额 + 当期借 - 当期贷（按科目性质自动处理） ;; ;; 会计恒等式（自动满足）： ;; 期末余额 = 期初余额 + 当期借 - 当期贷 ;; （资产/费用类科目“借”为增加；负债/权益/收入类科目“贷”为增加，报表已据此正确归类） ;; ;; 与早期版本相比，本版使用的均为 GnuCash 5.16 仍然支持且推荐的封装： ;; - gnc:options-add-date-interval! （会计期间起止日） ;; - gnc-register-account-list-option （科目多选，5.16 推荐直接注册） ;; - gnc:make-commodity-collector + 'getmonetary （按货币汇总，5.x 惯用取值方式） ;; - xaccAccountGetSplitList / xaccSplitGetAmount / xaccTransGetDate ;; （稳定的引擎层封装，用于拆出借/贷） ;; - qof-print-date （5.16 内置报表实际使用的日期格式化函数； ;; 注意 gnc-print-date 在 5.16 并不存在，勿用） ;; ;; copyright 2026 ocsxxi (with WorkBuddy in Hy3 \u0026 Hy4preview 2026.10.1 11:07) ;; ;; This program is free software; you can redistribute it and/or ;; modify it under the terms of the GNU General Public License as ;; published by the Free Software Foundation; either version 2 of ;; the License, or (at your option) any later version. ;; ;; This program is distributed in the hope that it will be useful, ;; but WITHOUT ANY WARRANTY; without even the implied warranty of ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the ;; GNU General Public License for more details. ;; ;; You should have received a copy of the GNU General Public License ;; along with this program; if not, contact: ;; ;; Free Software Foundation Voice: +1-617-542-5942 ;; 51 Franklin Street, Fifth Floor Fax: +1-617-542-2652 ;; Boston, MA 02110-1301, USA gnu@gnu.org ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; (define-module (gnucash reports custom account-change-summary)) (use-modules (gnucash engine)) (use-modules (gnucash utilities)) (use-modules (gnucash core-utils)) (use-modules (gnucash app-utils)) (use-modules (gnucash report)) (use-modules (gnucash html)) (use-modules (ice-9 format)) (use-modules (srfi srfi-1)) ;; ---- 选项名（字符串） ---- (define optname-startdate (N_ \"Start Date\")) (define optname-enddate (N_ \"End Date\")) (define optname-accounts (N_ \"Accounts\")) (define optname-show-full-name (N_ \"Show full account name\")) (define optname-only-active (N_ \"Only show accounts with activity\")) ;; ---- 辅助函数 ---- ;; 判断科目类型是否为“贷正常”（负债 / 权益 / 收入及其子类） (define (credit-normal-type? type) (or (eq? type ACCT-TYPE-LIABILITY) (eq? type ACCT-TYPE-CREDIT) (eq? type ACCT-TYPE-PAYABLE) (eq? type ACCT-TYPE-EQUITY) (eq? type ACCT-TYPE-INCOME))) ;; gnc-numeric 是否为负（5.16 用 gnc-numeric-negative-p，注意不是 gnc:gnc-numeric-num） (define (amount-negative? amt) (gnc-numeric-negative-p amt)) ;; 取 commodity-collector 中某货币的金额对象（gnc-monetary）； ;; 5.16 的 'getmonetary 签名为 (getmonetary 商品 sign?)，sign?=#f 表示不取负。 ;; 若该货币未记录，getmonetary 自动返回该货币下的零金额对象，无需额外兜底。 (define (collector-monetary coll comm) (coll 'getmonetary comm #f)) ;; 生成货币对象；若金额为负则取相反数，保证“借/贷”列始终为非负发生额 (define (non-negative-monetary comm amt) (let ((m (gnc:make-gnc-monetary comm amt))) (if (amount-negative? amt) (gnc:monetary-neg m) m))) ;; 取得账套中的所有科目（兜底：出错时返回空表，由渲染器提示用户手动选择） (define (get-all-accounts) (catch #t (lambda () (gnc-account-get-descendants (gnc-book-get-root-account (gnc-get-current-book)))) (lambda (key . args) '()))) ;; 取得科目编码；GnuCash 允许科目不设编码（此时返回 \"\"），统一兜底为空字符串， ;; 避免 #f 参与字符串比较导致排序/显示报错 (define (account-code account) (let ((c (xaccAccountGetCode account))) (if c c \"\"))) ;; 字符串升序比较：从左向右逐字符比较字符码值（char-\u003einteger）， ;; 遇到第一个不同字符即定序；若一个是另一个的前缀，则较短者排在前。 ;; 例：\"1001\" \u003c \"1001.01\" \u003c \"1002\"，且 \"1000\" 排在 \"999\" 之前（首位 '1' \u003c '9'）。 (define (string-code\u003c? a b) (let ((la (string-length a)) (lb (string-length b))) (let loop ((i 0)) (cond ((and (\u003e= i la) (\u003e= i lb)) #f) ; 完全相同：a 不小于 b ((\u003e= i la) #t) ; a 是 b 的前缀：短者在前 ((\u003e= i lb) #f) ; b 是 a 的前缀 (else (let ((va (char-\u003einteger (string-ref a i))) (vb (char-\u003einteger (string-ref b i)))) (cond ((\u003c va vb) #t) ((\u003e va vb) #f) (else (loop (+ i 1)))))))))) ;; 科目编码升序比较：编码一律按字符串处理，逐字符比较（不做数值转换） (define (account-code\u003c? a b) (string-code\u003c? (account-code a) (account-code b))) ;; ---- 核心计算：单个科目的四列数据 ---- (define (compute-account-row account start-date end-date) (let* ((comm (xaccAccountGetCommodity account)) (type (xaccAccountGetType account)) (open-coll (gnc:make-commodity-collector)) (debit-coll (gnc:make-commodity-collector)) (credit-coll (gnc:make-commodity-collector)) (close-coll (gnc:make-commodity-collector))) (for-each (lambda (split) (let* ((txn (xaccSplitGetParent split)) (date (xaccTransGetDate txn)) (amt (xaccSplitGetAmount split))) (cond ;; 期间之前的凭证 -\u003e 计入期初（同时计入期末累计） ((\u003c date start-date) (open-coll 'add comm amt) (close-coll 'add comm amt)) ;; 期间之内（含起止日）-\u003e 拆为借/贷，并计入期末累计 ((\u003c= date end-date) (let* ((neg? (amount-negative? amt)) (debit? (if (credit-normal-type? type) neg? (not neg?)))) (if debit? (debit-coll 'add comm amt) (credit-coll 'add comm amt)) (close-coll 'add comm amt))) (else #f)))) ; 期间之后 -\u003e 忽略 (xaccAccountGetSplitList account)) ;; 返回：(货币 期初 当期借 当期贷 期末 科目)，均为 gnc-monetary 对象；末尾附科目便于渲染 (list comm (collector-monetary open-coll comm) (non-negative-monetary comm (gnc:gnc-monetary-amount (collector-monetary debit-coll comm))) (non-negative-monetary comm (gnc:gnc-monetary-amount (collector-monetary credit-coll comm))) (collector-monetary close-coll comm) account))) ;; ---- 选项生成器 ---- (define (options-generator) (let ((options (gnc-new-optiondb))) ;; 会计期间（起止日）—— 5.x 推荐封装 (gnc:options-add-date-interval! options gnc:pagename-general optname-startdate optname-enddate \"a\") ;; 科目选择 (gnc-register-account-list-option options gnc:pagename-accounts optname-accounts \"a\" (N_ \"Select the accounts to include in the report. Leave as-is to include all accounts.\") (get-all-accounts)) ;; 显示选项 (gnc-register-simple-boolean-option options gnc:pagename-display optname-show-full-name \"a\" (N_ \"Show the full account name (including parent accounts).\") #t) (gnc-register-simple-boolean-option options gnc:pagename-display optname-only-active \"b\" (N_ \"Only show accounts that had debit or credit activity in the period.\") #f) (gnc:options-set-default-section options gnc:pagename-general) options)) ;; ---- 渲染器 ---- (define (renderer report-obj) (define (get-op section name) (gnc:option-value (gnc:lookup-option (gnc:report-options report-obj) section name))) (let* ((start-date (gnc:time64-start-day-time (gnc:date-option-absolute-time (get-op gnc:pagename-general optname-startdate)))) (end-date (gnc:time64-end-day-time (gnc:date-option-absolute-time (get-op gnc:pagename-general optname-enddate)))) (selected (get-op gnc:pagename-accounts optname-accounts)) (show-full? (get-op gnc:pagename-display optname-show-full-name)) (only-active? (get-op gnc:pagename-display optname-only-active)) (accounts (if (null? selected) (get-all-accounts) selected)) (document (gnc:make-html-document))) (gnc:html-document-set-title! document (_ \"科目余额变动表 / Account Change Summary\")) (gnc:html-document-add-object! document (gnc:make-html-text (gnc:html-markup-p (format #f (_ \"会计期间：~a 至 ~a 所选科目数：~d\") (qof-print-date start-date) (qof-print-date end-date) (length accounts))))) (if (null? accounts) ;; 未选择任何科目时的提示 (gnc:html-document-add-object! document (gnc:make-html-text (gnc:html-markup-p (_ \"未选择任何科目。请在报表选项的“科目”页中选择需要统计的科目，\" \"或保持默认以统计全部科目。\")))) ;; 正常构建表格 (let* ((sorted (sort accounts (lambda (a b) (account-code\u003c? a b)))) (rows (map (lambda (a) (compute-account-row a start-date end-date)) sorted)) (g-open (gnc:make-commodity-collector)) (g-debit (gnc:make-commodity-collector)) (g-credit (gnc:make-commodity-collector)) (g-close (gnc:make-commodity-collector)) (comm-list '())) ;; 累计合计，并收集出现的不同货币 (for-each (lambda (row) (let ((comm (list-ref row 0)) (open (list-ref row 1)) (deb (list-ref row 2)) (cred (list-ref row 3)) (close (list-ref row 4))) (g-open 'add comm (gnc:gnc-monetary-amount open)) (g-debit 'add comm (gnc:gnc-monetary-amount deb)) (g-credit 'add comm (gnc:gnc-monetary-amount cred)) (g-close 'add comm (gnc:gnc-monetary-amount close)) (if (not (any (lambda (c) (string=? (gnc-commodity-get-mnemonic c) (gnc-commodity-get-mnemonic comm))) comm-list)) (set! comm-list (cons comm comm-list))))) rows) (let ((table (gnc:make-html-table))) (gnc:html-table-set-col-headers! table (list (_ \"科目编码\") (_ \"科目\") (_ \"期初余额\") (_ \"当期借方\") (_ \"当期贷方\") (_ \"期末余额\"))) ;; 逐科目明细行 (for-each (lambda (row) (let ((account (list-ref row 5)) (comm (list-ref row 0)) (open (list-ref row 1)) (deb (list-ref row 2)) (cred (list-ref row 3)) (close (list-ref row 4))) (let ((deb-amt (gnc:gnc-monetary-amount deb)) (cred-amt (gnc:gnc-monetary-amount cred))) (when (or (not only-active?) (not (and (gnc-numeric-zero-p deb-amt) (gnc-numeric-zero-p cred-amt)))) (gnc:html-table-append-row! table (list (account-code account) (if show-full? (gnc-account-get-full-name account) (xaccAccountGetName account)) (gnc:make-html-table-cell/markup \"number-cell\" open) (gnc:make-html-table-cell/markup \"number-cell\" deb) (gnc:make-html-table-cell/markup \"number-cell\" cred) (gnc:make-html-table-cell/markup \"number-cell\" close))))))) rows) ;; 合计行（按货币分别汇总；单一货币时仅一行“合计”） (for-each (lambda (comm) (let ((open (collector-monetary g-open comm)) (deb (non-negative-monetary comm (gnc:gnc-monetary-amount (collector-monetary g-debit comm)))) (cred (non-negative-monetary comm (gnc:gnc-monetary-amount (collector-monetary g-credit comm)))) (close (collector-monetary g-close comm)) (label (if (= (length comm-list) 1) (_ \"合计\") (format #f (_ \"合计 (~a)\") (gnc-commodity-get-mnemonic comm))))) (gnc:html-table-append-row! table (list \"\" label (gnc:make-html-table-cell/markup \"number-cell\" open) (gnc:make-html-table-cell/markup \"number-cell\" deb) (gnc:make-html-table-cell/markup \"number-cell\" cred) (gnc:make-html-table-cell/markup \"number-cell\" close))))) comm-list) (gnc:html-document-add-object! document table)))) document)) ;; ---- 注册报表 ---- ;; 注意：report-guid 必须为 32 位十六进制、不含连字符。 ;; 建议用 GnuCash 自带 gnucash-make-guids 重新生成一个唯一 GUID 以防与其它报表冲突。 (gnc:define-report 'version 1 'name (N_ \"科目余额变动表 / Account Change Summary\") 'report-guid \"7e922f52d2b74401970da02a0ca91052\" 'menu-tip (N_ \"Select an accounting period and accounts to summarise opening balance, period debits, period credits and closing balance.\") 'menu-path (list gnc:menuname-example) 'options-generator options-generator 'renderer renderer) 安装方法 将此文件复制到 GnuCash 用户数据目录： Linux : ~/.local/share/gnucash/ Windows : %APPDATA%\\GnuCash\\ macOS : ~/Library/Application Support/GnuCash/\n在同目录下 config-user.scm 中追加一行（若该文件不存在，新建一个即可，内容如下）：\n文件：config-user.scm\n(load (gnc-build-userdata-path \"account-change-summary.scm\")) 重启 GnuCash。报表出现在：报表 -\u003e 示例 -\u003e 科目余额变动表 ","wordCount":"1153","inLanguage":"zh","datePublished":"2026-10-01T12:00:00+08:00","dateModified":"2026-10-01T12:00:00+08:00","author":{"@type":"Person","name":"ocsxxi"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://ocsxxi.top/posts/2026-10-01-1/"},"publisher":{"@type":"Organization","name":"Ocsxxi's Blog","logo":{"@type":"ImageObject","url":"https://ocsxxi.top/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://ocsxxi.top/ accesskey=h title="Ocsxxi's Blog (Alt + H)">Ocsxxi's Blog</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button><ul class=lang-switch><li>|</li></ul></div></div><ul id=menu><li><a href=https://ocsxxi.top/archives title=归档><span>归档</span></a></li><li><a href=https://ocsxxi.top/search/ title=搜索><span>搜索</span></a></li><li><a href=https://ocsxxi.top/tags/ title=标签><span>标签</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://ocsxxi.top/>主页</a>&nbsp;»&nbsp;<a href=https://ocsxxi.top/posts/>Posts</a></div><h1 class="post-title entry-hint-parent">GnuCash期间科目余额变动表</h1><div class=post-description>因个人记录自己的账目时发现GnuCash官方的试算表不能体现期间账目变化情况，故进行报表设计并使用WorkBuddy实现并完成人工测试。</div><div class=post-meta><span title='2026-10-01 12:00:00 +0800 +0800'>十月 1, 2026</span>&nbsp;·&nbsp;ocsxxi</div></header><div class=toc><details><summary accesskey=c title="(Alt + C)"><span class=details>目录</span></summary><div class=inner><ul><li><a href=#%e6%8a%a5%e8%a1%a8%e6%96%87%e4%bb%b6 aria-label=报表文件>报表文件</a></li><li><a href=#%e5%ae%89%e8%a3%85%e6%96%b9%e6%b3%95 aria-label=安装方法>安装方法</a></li></ul></div></details></div><div class=post-content><p>在多个软件对账的时候需要看到特定期间的科目账目变动统计情况，而<code>GnuCash</code>官方并未提供类似报表，故进行报表设计并使用<code>WorkBuddy</code>实现，经人工测试，该报表在<code>GnuCash 5.16</code>显示正常，其他版本未测试。</p><p>该报表每行包含单个科目的<code>科目代码</code>、<code>科目名称</code>、<code>期初余额</code>、<code>当期借合计</code>、<code>当期贷合计</code>、<code>期末余额</code>，如有需要请自取。</p><h2 id=报表文件>报表文件<a hidden class=anchor aria-hidden=true href=#报表文件>#</a></h2><p>文件名称：<code>account-change-summary.scm</code></p><pre tabindex=0><code class=language-guile data-lang=guile>;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 科目余额变动表  /  Account Change Summary
+;; 
+;; 一个符合 GnuCash 报表规范的自定义报表（适配 GnuCash 5.x，已在 5.16 验证 API）。
+;; 针对用户在选项中选定的【会计期间】与【科目】，逐科目汇总：
+;;   期初余额 (opening balance)    —— 期间开始前该科目的余额
+;;   当期借方 (period debit)       —— 期间内该科目的借方发生额
+;;   当期贷方 (period credit)      —— 期间内该科目的贷方发生额
+;;   期末余额 (closing balance)    —— 期初余额 + 当期借 - 当期贷（按科目性质自动处理）
+;;
+;; 会计恒等式（自动满足）：
+;;   期末余额 = 期初余额 + 当期借 - 当期贷
+;; （资产/费用类科目“借”为增加；负债/权益/收入类科目“贷”为增加，报表已据此正确归类）
+;;
+;; 与早期版本相比，本版使用的均为 GnuCash 5.16 仍然支持且推荐的封装：
+;;   - gnc:options-add-date-interval!              （会计期间起止日）
+;;   - gnc-register-account-list-option            （科目多选，5.16 推荐直接注册）
+;;   - gnc:make-commodity-collector + &#39;getmonetary （按货币汇总，5.x 惯用取值方式）
+;;   - xaccAccountGetSplitList / xaccSplitGetAmount / xaccTransGetDate
+;;                                            （稳定的引擎层封装，用于拆出借/贷）
+;;   - qof-print-date                             （5.16 内置报表实际使用的日期格式化函数；
+;;                                                 注意 gnc-print-date 在 5.16 并不存在，勿用）
+;;
+;; copyright 2026 ocsxxi (with WorkBuddy in Hy3 &amp; Hy4preview 2026.10.1 11:07)
+;;
+;; This program is free software; you can redistribute it and/or    
+;; modify it under the terms of the GNU General Public License as   
+;; published by the Free Software Foundation; either version 2 of   
+;; the License, or (at your option) any later version.              
+;;                                                                  
+;; This program is distributed in the hope that it will be useful,  
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of   
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the    
+;; GNU General Public License for more details.                     
+;;                                                                  
+;; You should have received a copy of the GNU General Public License
+;; along with this program; if not, contact:
+;;
+;; Free Software Foundation           Voice:  +1-617-542-5942
+;; 51 Franklin Street, Fifth Floor    Fax:    +1-617-542-2652
+;; Boston, MA  02110-1301,  USA       gnu@gnu.org
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define-module (gnucash reports custom account-change-summary))
+(use-modules (gnucash engine))
+(use-modules (gnucash utilities))
+(use-modules (gnucash core-utils))
+(use-modules (gnucash app-utils))
+(use-modules (gnucash report))
+(use-modules (gnucash html))
+(use-modules (ice-9 format))
+(use-modules (srfi srfi-1))
+
+;; ---- 选项名（字符串） ----
+(define optname-startdate      (N_ &#34;Start Date&#34;))
+(define optname-enddate        (N_ &#34;End Date&#34;))
+(define optname-accounts       (N_ &#34;Accounts&#34;))
+(define optname-show-full-name (N_ &#34;Show full account name&#34;))
+(define optname-only-active    (N_ &#34;Only show accounts with activity&#34;))
+
+;; ---- 辅助函数 ----
+
+;; 判断科目类型是否为“贷正常”（负债 / 权益 / 收入及其子类）
+(define (credit-normal-type? type)
+  (or (eq? type ACCT-TYPE-LIABILITY)
+      (eq? type ACCT-TYPE-CREDIT)
+      (eq? type ACCT-TYPE-PAYABLE)
+      (eq? type ACCT-TYPE-EQUITY)
+      (eq? type ACCT-TYPE-INCOME)))
+
+;; gnc-numeric 是否为负（5.16 用 gnc-numeric-negative-p，注意不是 gnc:gnc-numeric-num）
+(define (amount-negative? amt)
+  (gnc-numeric-negative-p amt))
+
+;; 取 commodity-collector 中某货币的金额对象（gnc-monetary）；
+;; 5.16 的 &#39;getmonetary 签名为 (getmonetary 商品 sign?)，sign?=#f 表示不取负。
+;; 若该货币未记录，getmonetary 自动返回该货币下的零金额对象，无需额外兜底。
+(define (collector-monetary coll comm)
+  (coll &#39;getmonetary comm #f))
+
+;; 生成货币对象；若金额为负则取相反数，保证“借/贷”列始终为非负发生额
+(define (non-negative-monetary comm amt)
+  (let ((m (gnc:make-gnc-monetary comm amt)))
+    (if (amount-negative? amt)
+        (gnc:monetary-neg m)
+        m)))
+
+;; 取得账套中的所有科目（兜底：出错时返回空表，由渲染器提示用户手动选择）
+(define (get-all-accounts)
+  (catch #t
+    (lambda ()
+      (gnc-account-get-descendants
+        (gnc-book-get-root-account (gnc-get-current-book))))
+    (lambda (key . args) &#39;())))
+
+;; 取得科目编码；GnuCash 允许科目不设编码（此时返回 &#34;&#34;），统一兜底为空字符串，
+;; 避免 #f 参与字符串比较导致排序/显示报错
+(define (account-code account)
+  (let ((c (xaccAccountGetCode account)))
+    (if c c &#34;&#34;)))
+
+;; 字符串升序比较：从左向右逐字符比较字符码值（char-&gt;integer），
+;; 遇到第一个不同字符即定序；若一个是另一个的前缀，则较短者排在前。
+;; 例：&#34;1001&#34; &lt; &#34;1001.01&#34; &lt; &#34;1002&#34;，且 &#34;1000&#34; 排在 &#34;999&#34; 之前（首位 &#39;1&#39; &lt; &#39;9&#39;）。
+(define (string-code&lt;? a b)
+  (let ((la (string-length a))
+        (lb (string-length b)))
+    (let loop ((i 0))
+      (cond
+        ((and (&gt;= i la) (&gt;= i lb)) #f)  ; 完全相同：a 不小于 b
+        ((&gt;= i la) #t)                  ; a 是 b 的前缀：短者在前
+        ((&gt;= i lb) #f)                  ; b 是 a 的前缀
+        (else
+          (let ((va (char-&gt;integer (string-ref a i)))
+                (vb (char-&gt;integer (string-ref b i))))
+            (cond ((&lt; va vb) #t)
+                  ((&gt; va vb) #f)
+                  (else (loop (+ i 1))))))))))
+
+;; 科目编码升序比较：编码一律按字符串处理，逐字符比较（不做数值转换）
+(define (account-code&lt;? a b)
+  (string-code&lt;? (account-code a) (account-code b)))
+
+;; ---- 核心计算：单个科目的四列数据 ----
+(define (compute-account-row account start-date end-date)
+  (let* ((comm  (xaccAccountGetCommodity account))
+         (type  (xaccAccountGetType account))
+         (open-coll  (gnc:make-commodity-collector))
+         (debit-coll (gnc:make-commodity-collector))
+         (credit-coll (gnc:make-commodity-collector))
+         (close-coll (gnc:make-commodity-collector)))
+    (for-each
+      (lambda (split)
+        (let* ((txn  (xaccSplitGetParent split))
+               (date (xaccTransGetDate txn))
+               (amt  (xaccSplitGetAmount split)))
+          (cond
+            ;; 期间之前的凭证 -&gt; 计入期初（同时计入期末累计）
+            ((&lt; date start-date)
+             (open-coll  &#39;add comm amt)
+             (close-coll &#39;add comm amt))
+            ;; 期间之内（含起止日）-&gt; 拆为借/贷，并计入期末累计
+            ((&lt;= date end-date)
+             (let* ((neg?   (amount-negative? amt))
+                   (debit? (if (credit-normal-type? type) neg? (not neg?))))
+               (if debit?
+                   (debit-coll &#39;add comm amt)
+                   (credit-coll &#39;add comm amt))
+               (close-coll &#39;add comm amt)))
+            (else #f))))                      ; 期间之后 -&gt; 忽略
+      (xaccAccountGetSplitList account))
+    ;; 返回：(货币 期初 当期借 当期贷 期末 科目)，均为 gnc-monetary 对象；末尾附科目便于渲染
+    (list comm
+          (collector-monetary open-coll comm)
+          (non-negative-monetary comm
+            (gnc:gnc-monetary-amount (collector-monetary debit-coll comm)))
+          (non-negative-monetary comm
+            (gnc:gnc-monetary-amount (collector-monetary credit-coll comm)))
+          (collector-monetary close-coll comm)
+          account)))
+
+;; ---- 选项生成器 ----
+(define (options-generator)
+  (let ((options (gnc-new-optiondb)))
+    ;; 会计期间（起止日）—— 5.x 推荐封装
+    (gnc:options-add-date-interval!
+      options gnc:pagename-general optname-startdate optname-enddate &#34;a&#34;)
+    ;; 科目选择
+    (gnc-register-account-list-option
+      options
+      gnc:pagename-accounts optname-accounts &#34;a&#34;
+      (N_ &#34;Select the accounts to include in the report. Leave as-is to include all accounts.&#34;)
+      (get-all-accounts))
+    ;; 显示选项
+    (gnc-register-simple-boolean-option
+      options
+      gnc:pagename-display optname-show-full-name &#34;a&#34;
+      (N_ &#34;Show the full account name (including parent accounts).&#34;) #t)
+    (gnc-register-simple-boolean-option
+      options
+      gnc:pagename-display optname-only-active &#34;b&#34;
+      (N_ &#34;Only show accounts that had debit or credit activity in the period.&#34;)
+      #f)
+    (gnc:options-set-default-section options gnc:pagename-general)
+    options))
+
+;; ---- 渲染器 ----
+(define (renderer report-obj)
+  (define (get-op section name)
+    (gnc:option-value (gnc:lookup-option (gnc:report-options report-obj) section name)))
+  (let* ((start-date (gnc:time64-start-day-time
+                      (gnc:date-option-absolute-time
+                        (get-op gnc:pagename-general optname-startdate))))
+         (end-date   (gnc:time64-end-day-time
+                      (gnc:date-option-absolute-time
+                        (get-op gnc:pagename-general optname-enddate))))
+         (selected   (get-op gnc:pagename-accounts optname-accounts))
+         (show-full? (get-op gnc:pagename-display optname-show-full-name))
+         (only-active? (get-op gnc:pagename-display optname-only-active))
+         (accounts   (if (null? selected) (get-all-accounts) selected))
+         (document   (gnc:make-html-document)))
+
+    (gnc:html-document-set-title!
+      document (_ &#34;科目余额变动表 / Account Change Summary&#34;))
+    (gnc:html-document-add-object!
+      document
+      (gnc:make-html-text
+        (gnc:html-markup-p
+          (format #f (_ &#34;会计期间：~a 至 ~a    所选科目数：~d&#34;)
+                  (qof-print-date start-date)
+                  (qof-print-date end-date)
+                  (length accounts)))))
+
+    (if (null? accounts)
+        ;; 未选择任何科目时的提示
+        (gnc:html-document-add-object!
+          document
+          (gnc:make-html-text
+            (gnc:html-markup-p
+              (_ &#34;未选择任何科目。请在报表选项的“科目”页中选择需要统计的科目，&#34;
+                 &#34;或保持默认以统计全部科目。&#34;))))
+        ;; 正常构建表格
+        (let* ((sorted (sort accounts
+                             (lambda (a b) (account-code&lt;? a b))))
+               (rows   (map (lambda (a) (compute-account-row a start-date end-date))
+                            sorted))
+               (g-open   (gnc:make-commodity-collector))
+               (g-debit  (gnc:make-commodity-collector))
+               (g-credit (gnc:make-commodity-collector))
+               (g-close  (gnc:make-commodity-collector))
+               (comm-list &#39;()))
+          ;; 累计合计，并收集出现的不同货币
+          (for-each
+            (lambda (row)
+              (let ((comm  (list-ref row 0))
+                    (open  (list-ref row 1))
+                    (deb   (list-ref row 2))
+                    (cred  (list-ref row 3))
+                    (close (list-ref row 4)))
+                (g-open   &#39;add comm (gnc:gnc-monetary-amount open))
+                (g-debit  &#39;add comm (gnc:gnc-monetary-amount deb))
+                (g-credit &#39;add comm (gnc:gnc-monetary-amount cred))
+                (g-close  &#39;add comm (gnc:gnc-monetary-amount close))
+                (if (not (any (lambda (c)
+                                (string=? (gnc-commodity-get-mnemonic c)
+                                          (gnc-commodity-get-mnemonic comm)))
+                              comm-list))
+                    (set! comm-list (cons comm comm-list)))))
+            rows)
+
+          (let ((table (gnc:make-html-table)))
+            (gnc:html-table-set-col-headers!
+              table
+              (list (_ &#34;科目编码&#34;)
+                    (_ &#34;科目&#34;)
+                    (_ &#34;期初余额&#34;)
+                    (_ &#34;当期借方&#34;)
+                    (_ &#34;当期贷方&#34;)
+                    (_ &#34;期末余额&#34;)))
+
+            ;; 逐科目明细行
+            (for-each
+              (lambda (row)
+                (let ((account (list-ref row 5))
+                      (comm  (list-ref row 0))
+                      (open  (list-ref row 1))
+                      (deb   (list-ref row 2))
+                      (cred  (list-ref row 3))
+                      (close (list-ref row 4)))
+                  (let ((deb-amt  (gnc:gnc-monetary-amount deb))
+                        (cred-amt (gnc:gnc-monetary-amount cred)))
+                    (when (or (not only-active?)
+                              (not (and (gnc-numeric-zero-p deb-amt)
+                                        (gnc-numeric-zero-p cred-amt))))
+                      (gnc:html-table-append-row!
+                        table
+                        (list
+                          (account-code account)
+                          (if show-full?
+                              (gnc-account-get-full-name account)
+                              (xaccAccountGetName account))
+                          (gnc:make-html-table-cell/markup &#34;number-cell&#34; open)
+                          (gnc:make-html-table-cell/markup &#34;number-cell&#34; deb)
+                          (gnc:make-html-table-cell/markup &#34;number-cell&#34; cred)
+                          (gnc:make-html-table-cell/markup &#34;number-cell&#34; close)))))))
+              rows)
+
+            ;; 合计行（按货币分别汇总；单一货币时仅一行“合计”）
+            (for-each
+              (lambda (comm)
+                (let ((open  (collector-monetary g-open comm))
+                      (deb   (non-negative-monetary comm
+                              (gnc:gnc-monetary-amount (collector-monetary g-debit comm))))
+                      (cred  (non-negative-monetary comm
+                              (gnc:gnc-monetary-amount (collector-monetary g-credit comm))))
+                      (close (collector-monetary g-close comm))
+                      (label (if (= (length comm-list) 1)
+                                 (_ &#34;合计&#34;)
+                                 (format #f (_ &#34;合计 (~a)&#34;)
+                                         (gnc-commodity-get-mnemonic comm)))))
+                  (gnc:html-table-append-row!
+                    table
+                    (list
+                      &#34;&#34;
+                      label
+                      (gnc:make-html-table-cell/markup &#34;number-cell&#34; open)
+                      (gnc:make-html-table-cell/markup &#34;number-cell&#34; deb)
+                      (gnc:make-html-table-cell/markup &#34;number-cell&#34; cred)
+                      (gnc:make-html-table-cell/markup &#34;number-cell&#34; close)))))
+              comm-list)
+
+            (gnc:html-document-add-object! document table))))
+
+    document))
+
+;; ---- 注册报表 ----
+;; 注意：report-guid 必须为 32 位十六进制、不含连字符。
+;; 建议用 GnuCash 自带 gnucash-make-guids 重新生成一个唯一 GUID 以防与其它报表冲突。
+(gnc:define-report
+  &#39;version 1
+  &#39;name (N_ &#34;科目余额变动表 / Account Change Summary&#34;)
+  &#39;report-guid &#34;7e922f52d2b74401970da02a0ca91052&#34;
+  &#39;menu-tip (N_ &#34;Select an accounting period and accounts to summarise opening balance, period debits, period credits and closing balance.&#34;)
+  &#39;menu-path (list gnc:menuname-example)
+  &#39;options-generator options-generator
+  &#39;renderer renderer)
+</code></pre><h2 id=安装方法>安装方法<a hidden class=anchor aria-hidden=true href=#安装方法>#</a></h2><ol><li><p>将此文件复制到 GnuCash 用户数据目录：
+Linux : <code>~/.local/share/gnucash/</code>
+Windows : <code>%APPDATA%\GnuCash\</code>
+macOS : <code>~/Library/Application Support/GnuCash/</code></p></li><li><p>在同目录下 <code>config-user.scm</code> 中追加一行（若该文件不存在，新建一个即可，内容如下）：</p></li></ol><p>文件：<code>config-user.scm</code></p><pre tabindex=0><code>(load (gnc-build-userdata-path &#34;account-change-summary.scm&#34;))
+</code></pre><ol start=3><li>重启 GnuCash。报表出现在：<code>报表 -> 示例 -> 科目余额变动表</code></li></ol></div><footer class=post-footer><ul class=post-tags><li><a href=https://ocsxxi.top/tags/gnucash/>GnuCash</a></li><li><a href=https://ocsxxi.top/tags/%E8%B4%A2%E5%8A%A1%E7%AE%A1%E7%90%86/>财务管理</a></li></ul><nav class=paginav><a class=next href=https://ocsxxi.top/posts/2024-01-15-1/><span class=title>下一页 »</span><br><span>为爱付出与自我感动</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2026 <a href=https://ocsxxi.top/>Ocsxxi's Blog</a></span>
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span><style>.copyright-image{display:inline-block;height:1.1em;width:1.1em}</style><br><span><a href=https://beian.miit.gov.cn/>陕ICP备2022002688号-1
+</a></span><span><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=61010302000879"><img class=copyright-image src=https://ocsxxi.top/beian.png alt="陕公网安备 61010302000879号">
+陕公网安备 61010302000879号
+</a></span><span><a href=https://creativecommons.org/licenses/by-nc-sa/4.0/>CC BY-NC-SA 4.0 Licensed</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>

@@ -11,8 +11,15 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 15 Jan 2024 11:40:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 01 Oct 2026 12:00:00 +0800</lastBuildDate>
     <atom:link href="https://ocsxxi.top/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GnuCash期间科目余额变动表</title>
+      <link>https://ocsxxi.top/posts/2026-10-01-1/</link>
+      <pubDate>Thu, 01 Oct 2026 12:00:00 +0800</pubDate>
+      <guid>https://ocsxxi.top/posts/2026-10-01-1/</guid>
+      <description>因个人记录自己的账目时发现GnuCash官方的试算表不能体现期间账目变化情况，故进行报表设计并使用WorkBuddy实现并完成人工测试。</description>
+    </item>
     <item>
       <title>为爱付出与自我感动</title>
       <link>https://ocsxxi.top/posts/2024-01-15-1/</link>
