@@ -30,8 +30,8 @@ jobs:
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         # PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}  # 你的个人访问令牌
+        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         EXTERNAL_REPOSITORY: ocsxxi/ocsxxi.github.io  # 你的GitHub Pages仓库
         PUBLISH_BRANCH: gh-pages  # 或者是你的GitHub Pages分支
         PUBLISH_DIR: ./
